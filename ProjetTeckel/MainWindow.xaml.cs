@@ -39,16 +39,7 @@ namespace ProjetTeckel
                         Grid.SetRow(teckel, rowRec);//déplace le rectangle sur ces nouvelles coordonnées
                     }
                     break;
-            }
-        }
-
-        private void teckel_KeyUp(object sender, KeyEventArgs e)
-        {
-            int rowRec = Grid.GetRow(teckel);
-            int colRec = Grid.GetColumn(teckel);
-            switch (e.Key.ToString())
-            {
-                case "Up":
+                case "Down":
                     if (rowRec > 0)
                     {
                         rowRec = rowRec + 1;
@@ -57,5 +48,6 @@ namespace ProjetTeckel
                     break;
             }
         }
+
     }
 }
