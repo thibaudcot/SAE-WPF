@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace ProjetTeckel
 {
@@ -23,6 +24,38 @@ namespace ProjetTeckel
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void teckel_KeyDown(object sender, KeyEventArgs e)
+        {
+            int rowRec = Grid.GetRow(teckel);
+            int colRec = Grid.GetColumn(teckel);
+            switch (e.Key.ToString())
+            {
+                case "Up":
+                    if (rowRec > 0)
+                    {
+                        rowRec = rowRec - 1;
+                        Grid.SetRow(teckel, rowRec);//déplace le rectangle sur ces nouvelles coordonnées
+                    }
+                    break;
+            }
+        }
+
+        private void teckel_KeyUp(object sender, KeyEventArgs e)
+        {
+            int rowRec = Grid.GetRow(teckel);
+            int colRec = Grid.GetColumn(teckel);
+            switch (e.Key.ToString())
+            {
+                case "Up":
+                    if (rowRec > 0)
+                    {
+                        rowRec = rowRec + 1;
+                        Grid.SetRow(teckel, rowRec);//déplace le rectangle sur ces nouvelles coordonnées
+                    }
+                    break;
+            }
         }
     }
 }
