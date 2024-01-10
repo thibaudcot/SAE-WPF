@@ -6,46 +6,43 @@
         xmlns:local="clr-namespace:ProjetTeckel"
         mc:Ignorable="d"
         Title="MainWindow" Height="465" Width="465">
-    <Grid Margin="10,26,95,27">
-        <Canvas x:Name="Canvas" Background="Green">
-            <Grid x:Name="Grid" Height="396" Width="360" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="25"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="25*"/>
-                    <RowDefinition Height="25*"/>
-                    <RowDefinition Height="25*"/>
-                </Grid.RowDefinitions>
-                <Rectangle x:Name="teckel" Fill="#FFF4F4F5" HorizontalAlignment="Center" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Height="25" Grid.Column="1" Grid.Row="1" KeyDown="teckel_ToucheBas" />
-            </Grid>
-        </Canvas>
-        <TextBlock x:Name="score" HorizontalAlignment="Left" Margin="375,0,0,0" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="61" Height="45"/>
-
+    <Grid x:Name="snakeGrid" Margin="10,0,0,0" Height="429" Width="324" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle x:Name="snake" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="0,0,0,0.6" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Grid.Row="2" Grid.Column="1"/>
     </Grid>
+    
 </Window>
