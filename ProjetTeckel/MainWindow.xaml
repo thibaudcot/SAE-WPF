@@ -42,7 +42,7 @@
                     <RowDefinition Height="25*"/>
                     <RowDefinition Height="25*"/>
                 </Grid.RowDefinitions>
-                <Rectangle x:Name="teckel" Fill="#FFF4F4F5" HorizontalAlignment="Center" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Height="25" Grid.Column="1" Grid.Row="1" KeyDown="teckel_KeyDown" KeyUp="teckel_KeyUp"/>
+                <Rectangle x:Name="teckel" Fill="#FFF4F4F5" HorizontalAlignment="Center" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Height="25" Grid.Column="1" Grid.Row="1" KeyDown="teckel_ToucheBas" KeyUp="teckel_ToucheHaut"/>
             </Grid>
         </Canvas>
         <TextBlock x:Name="score" HorizontalAlignment="Left" Margin="375,0,0,0" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="61" Height="45"/>
