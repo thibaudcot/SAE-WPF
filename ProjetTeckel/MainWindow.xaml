@@ -42,7 +42,7 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
-        <Rectangle x:Name="snake" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="0,0,0,0.6" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Grid.Row="2" Grid.Column="1"/>
+        <Rectangle x:Name="teckel" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="0,0,0,0.6" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Grid.Row="2" Grid.Column="1" KeyDown="teckel_ToucheBas"/>
     </Grid>
     
 </Window>
