@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="menu.jpg" />
+    <Resource Include="menu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
