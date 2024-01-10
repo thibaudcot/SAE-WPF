@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="image\menu.jpg" />
     <None Remove="menu.jpg" />
+    <None Remove="Police\Browood-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="image\menu.jpg" />
+    <EmbeddedResource Include="Police\Browood-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
