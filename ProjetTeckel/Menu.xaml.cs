@@ -26,7 +26,12 @@ namespace ProjetTeckel
 
         private void Jouer_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
+        }
 
+        private void Annuler_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
         }
     }
 }

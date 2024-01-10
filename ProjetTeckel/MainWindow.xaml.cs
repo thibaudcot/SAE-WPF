@@ -22,6 +22,12 @@ namespace ProjetTeckel
         public MainWindow()
         {
             InitializeComponent();
+            Menu ChoixMenu = new Menu();
+            ChoixMenu.Show();
+
+            if (DialogResult == false) 
+                Application.Current.Shutdown(); 
+            InitializeComponent();
         }
 
         private void teckel_ToucheBas(object envoye, KeyEventArgs e)
@@ -56,31 +62,6 @@ namespace ProjetTeckel
             }
 
             
-        }
-        private void ShowGameDialog()
-        {
-            MessageBoxResult result = MessageBox.Show("Voulez-vous jouer ?", "Boîte de dialogue de jeu", MessageBoxButton.YesNoCancel);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                // Code pour démarrer le jeu
-                MessageBox.Show("Le jeu va commencer !");
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-                // Code pour annuler l'action
-                MessageBox.Show("Action annulée.");
-            }
-            else
-            {
-                // Code à exécuter si l'utilisateur choisit de ne pas jouer
-                MessageBox.Show("Vous avez choisi de ne pas jouer.");
-            }
-        }
-
-        private void ShowDialogButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowGameDialog();
         }
     }
 }

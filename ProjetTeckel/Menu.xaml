@@ -6,10 +6,17 @@
     xmlns:local="clr-namespace:ProjetTeckel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Menu"
-    Width="800"
-    Height="450"
+    Width="500"
+    Height="300"
     mc:Ignorable="d">
     <Grid>
-        <Button Click="ShowDialogButton_Click" Content="Afficher la boîte de dialogue" />
+        <Rectangle Stroke="Black">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/menu.jpg"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="Jouer" Content="Jouer" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Height="52" Width="150" Background="#FF60F762" Click="Jouer_Click"/>
+        <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.972,0.278" Height="52" Width="150" Background="#FFDA4435" Click="Annuler_Click"/>
+
     </Grid>
 </Window>
