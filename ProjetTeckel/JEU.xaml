@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetTeckel"
         mc:Ignorable="d"
-        Title="JEU" Height="450" Width="800">
+        Title="JEU" Height="465" Width="450">
     <Grid>
-        
+        <Grid x:Name="Grid" Margin="10,0,0,0" Height="429" Width="302" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="teckel" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="0,0,0,0.6" Stroke="Black" Width="25" RenderTransformOrigin="-0.118,-0.168" Grid.Row="2" Grid.Column="1" KeyDown="teckel_touche_appuiyer"/>
+        </Grid>
     </Grid>
 </Window>

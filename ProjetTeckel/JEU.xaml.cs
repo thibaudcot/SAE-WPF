@@ -23,5 +23,24 @@ namespace ProjetTeckel
         {
             InitializeComponent();
         }
+
+        private void teckel_touche_appuiyer(object sender, KeyEventArgs e)
+        {
+            int ligneRec = Grid.GetRow(teckel);
+            int colRec = Grid.GetColumn(teckel);
+            switch (e.Key.ToString())
+            {
+                case "Haut":
+                    if (ligneRec > 0)
+                    {
+                        ligneRec = ligneRec - 1;
+                        Grid.SetRow(teckel, ligneRec);//déplace le rectangle sur ces nouvelles coordonnées
+                    }
+                    break;
+            }
+        }
+
+            
+    
     }
 }
