@@ -25,7 +25,7 @@ namespace ProjetTeckel
             Menu ChoixMenu = new Menu();
             ChoixMenu.Show();
 
-            if (DialogResult == false) 
+            if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown(); 
             InitializeComponent();
         }
