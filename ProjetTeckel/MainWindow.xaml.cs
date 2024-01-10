@@ -139,7 +139,7 @@ namespace ProjetTeckel
         }
         public void GameOver()
         {
-            MessageBox.Show("PERDU");
+            MessageBox.Show("Peux Mieux Faire xD");
             Grid.Children.Remove(nourriture);
             Grid.SetColumn(teckel, 2);
             Grid.SetRow(teckel, 2);
