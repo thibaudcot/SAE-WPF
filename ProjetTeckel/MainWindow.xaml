@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjetTeckel"
         mc:Ignorable="d"
         Title="MainWindow" Height="465" Width="465" KeyDown="PrjTeckel_KeyDown">
-    <Grid x:Name="snakeGrid" Margin="10,0,0,0" Height="396" Width="324" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen">
+    <Grid x:Name="Grid" Margin="10,0,0,0" Height="396" Width="324" HorizontalAlignment="Left" VerticalAlignment="Center" Background="ForestGreen">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
