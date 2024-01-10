@@ -27,7 +27,6 @@ namespace ProjetTeckel
 
             if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown(); 
-            InitializeComponent();
         }
 
         private void teckel_ToucheBas(object envoye, KeyEventArgs e)
