@@ -87,7 +87,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 3: //right
-                    if (colRec < 11)
+                    if (colRec < 12)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
