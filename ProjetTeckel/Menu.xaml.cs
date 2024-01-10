@@ -22,6 +22,7 @@ namespace ProjetTeckel
         public Menu()
         {
             InitializeComponent();
+            
         }
 
         private void Jouer_Click(object sender, RoutedEventArgs e)
