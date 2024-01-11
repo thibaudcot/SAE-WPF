@@ -8,38 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image\corps.png" />
-    <None Remove="image\menu.jpg" />
-    <None Remove="image\os.png" />
-    <None Remove="image\tete.png" />
-    <None Remove="image\tetemort.png" />
-    <None Remove="menu.jpg" />
-    <None Remove="Police\Browood-Regular.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Police\Browood-Regular.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="image\corps.png">
+    <None Update="image\corps.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\menu.jpg">
+    </None>
+    <None Update="image\menu.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\os.png">
+    </None>
+    <None Update="image\tete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\tete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\tetemort.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="menu.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
 
 </Project>

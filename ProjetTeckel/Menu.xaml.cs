@@ -22,7 +22,10 @@ namespace ProjetTeckel
         public Menu()
         {
             InitializeComponent();
-            
+            ImageBrush imgMenu = new ImageBrush();
+            imgMenu.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\menu.jpg"));
+            rMenu.Fill = imgMenu;
+
         }
 
         private void Jouer_Click(object sender, RoutedEventArgs e)
