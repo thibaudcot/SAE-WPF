@@ -10,14 +10,14 @@
     Height="300"
     mc:Ignorable="d">
     <Grid>
-        <Rectangle Stroke="Black">
+        <Rectangle Stroke="#FFD97733">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/menu.jpg"/>
             </Rectangle.Fill>
         </Rectangle>
         <Button x:Name="Jouer" Content="Jouer" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Height="52" Width="150" Background="#FF60F762" Click="Jouer_Click"/>
         <Button x:Name="Annuler" Content="Annuler" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.972,0.278" Height="52" Width="150" Background="#FFDA4435" Click="Annuler_Click"/>
-        <TextBlock HorizontalAlignment="Center" Height="25" Margin="0,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Foreground="#FFDF9361"><Run Language="fr-fr" Text="TECKEL"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Height="17" Margin="0,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Foreground="#FFDF9361" Background="Black"><Run Language="fr-fr" Text="TECKEL"/></TextBlock>
 
     </Grid>
 </Window>
