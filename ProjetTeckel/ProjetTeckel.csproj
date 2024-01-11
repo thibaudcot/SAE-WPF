@@ -8,18 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image\chocolat.jpg" />
     <None Remove="image\corps.png" />
     <None Remove="image\menu.jpg" />
     <None Remove="image\os.png" />
-    <None Remove="image\tetec.png" />
+    <None Remove="image\tete.png" />
     <None Remove="image\tetemort.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="image\chocolat.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="image\corps.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -29,7 +25,7 @@
     <Resource Include="image\os.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="image\tetec.png">
+    <Resource Include="image\tete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="image\tetemort.png">

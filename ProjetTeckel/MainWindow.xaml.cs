@@ -28,7 +28,7 @@ namespace ProjetTeckel
         {
             InitializeComponent();
             ImageBrush imgTeckel = new ImageBrush();
-            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetec.png"));
+            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
             teckel.Fill = imgTeckel;
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
