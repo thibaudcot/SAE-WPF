@@ -27,12 +27,14 @@ namespace ProjetTeckel
             public MainWindow()
         {
             InitializeComponent();
+            ImageBrush imgTeckel = new ImageBrush();
+            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+            teckel.Fill = imgTeckel;
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
             if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown();
-            InitializeComponent();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
