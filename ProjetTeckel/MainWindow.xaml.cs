@@ -58,7 +58,7 @@ namespace ProjetTeckel
                 nourriture.Height = teckel.Height;
                 //Os pour la nourriture
                 ImageBrush imgNourriture = new ImageBrush();
-                imgNourriture.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\os.png"));
+                imgNourriture.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\os.jpg"));
                 nourriture.Fill = imgNourriture;
                 //On l'ajoute à la grille
                 Grid.Children.Add(nourriture);
