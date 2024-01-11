@@ -57,7 +57,9 @@ namespace ProjetTeckel
                 nourriture.Width = teckel.Width;
                 nourriture.Height = teckel.Height;
                 //Couleur Rouge pour la nourriture
-                nourriture.Fill = Brushes.Red;
+                ImageBrush imgNourriture = new ImageBrush();
+                imgNourriture.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\os.png"));
+                nourriture.Fill = imgNourriture;
                 //On l'ajoute à la grille
                 Grid.Children.Add(nourriture);
                 Grid.SetColumn(nourriture, yNourriture);
