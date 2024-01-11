@@ -56,7 +56,7 @@ namespace ProjetTeckel
                 //Le rectangle nourriture aura les meme dimensions que le snake
                 nourriture.Width = teckel.Width;
                 nourriture.Height = teckel.Height;
-                //Couleur Rouge pour la nourriture
+                //Os pour la nourriture
                 ImageBrush imgNourriture = new ImageBrush();
                 imgNourriture.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\os.png"));
                 nourriture.Fill = imgNourriture;

@@ -8,29 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image\corps.png" />
-    <None Remove="image\menu.jpg" />
-    <None Remove="image\os.png" />
-    <None Remove="image\tete.png" />
-    <None Remove="image\tetemort.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="image\corps.png">
+    <None Update="image\chocolat.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\menu.jpg">
+    </None>
+    <None Update="image\corps.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\os.png">
+    </None>
+    <None Update="image\menu.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\tete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="image\tetemort.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
+	  <None Update="image\os.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="image\tete.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="image\tetemort.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
   </ItemGroup>
 
 </Project>
