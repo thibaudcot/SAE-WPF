@@ -10,44 +10,140 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Linq;
 
 namespace ProjetTeckel
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        public MainWindow()
+            int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
+            Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
+            Random random = new Random();
+            public MainWindow()
         {
             InitializeComponent();
-        }
+            Menu ChoixMenu = new Menu();
+            ChoixMenu.ShowDialog();
 
-        private void teckel_KeyDown(object sender, KeyEventArgs e)
+            if (ChoixMenu.DialogResult == false) 
+                Application.Current.Shutdown();
+            InitializeComponent();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+        void timer_Tick(object sender, EventArgs e)
         {
-            int rowRec = Grid.GetRow(teckel);
+            //on récupère les coordonnées du snake sur la grille
+            int ligneRec = Grid.GetRow(teckel);
+            int colRec = Grid.GetColumn(teckel);
+
+            //on choisit des coordonnées aléatoire pour la nourriture
+            int xNourriture = random.Next(0, Grid.RowDefinitions.Count);
+            int yNourriture = random.Next(0, Grid.ColumnDefinitions.Count);
+
+            //Si aucune nourriture n'est présente alors on l'ajoute 
+            if (!Grid.Children.Contains(nourriture) && _direction != 0)
+            {
+                //Le rectangle nourriture aura les meme dimensions que le snake
+                nourriture.Width = teckel.Width;
+                nourriture.Height = teckel.Height;
+                //Couleur Rouge pour la nourriture
+                nourriture.Fill = Brushes.Red;
+                //On l'ajoute à la grille
+                Grid.Children.Add(nourriture);
+                Grid.SetColumn(nourriture, yNourriture);
+                Grid.SetRow(nourriture, xNourriture);
+            }
+            switch (_direction)
+            {
+
+                case 1://up
+                    if (ligneRec > 0)
+                    {
+                        ligneRec = ligneRec - 1;
+                        Grid.SetRow(teckel, ligneRec);//déplace le rectangle sur ces nouvelles coordonnées
+                    }
+                    else
+                    {
+                        GameOver();
+                    }
+                    break;
+                case 2://left
+                    if (colRec > 0)
+                    {
+                        colRec = colRec - 1;
+                        Grid.SetColumn(teckel, colRec);
+                    }
+                    else
+                    {
+                        GameOver();
+                    }
+                    break;
+                case 3: //right
+                    if (colRec < 12)
+                    {
+                        colRec = colRec + 1;
+                        Grid.SetColumn(teckel, colRec);
+                    }
+                    else
+                    {
+                        GameOver();
+                    }
+                    break;
+                case 4: //down
+                    if (ligneRec < 15)
+                    {
+                        ligneRec = ligneRec + 1;
+                        Grid.SetRow(teckel,ligneRec);
+                    }
+                    else
+                    {
+                        GameOver();
+                    }
+                    break;
+            }
+            if (Grid.GetRow(teckel) == Grid.GetRow(nourriture) && Grid.GetColumn(teckel) == Grid.GetColumn(nourriture))
+            {
+                Grid.Children.Remove(nourriture);
+            }
+        }
+            private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
+        {
+            int ligneRec = Grid.GetRow(teckel);
             int colRec = Grid.GetColumn(teckel);
             switch (e.Key.ToString())
             {
                 case "Up":
-                    if (rowRec > 0)
-                    {
-                        rowRec = rowRec - 1;
-                        Grid.SetRow(teckel, rowRec);//déplace le rectangle sur ces nouvelles coordonnées
-                    }
+                    _direction = 1;
                     break;
+
                 case "Down":
-                    if (rowRec > 0)
-                    {
-                        rowRec = rowRec + 1;
-                        Grid.SetRow(teckel, rowRec);//déplace le rectangle sur ces nouvelles coordonnées
-                    }
+                    _direction = 4;
                     break;
+
+                case "Right":
+                    _direction = 3;
+                    break;
+                case "Left":
+                    _direction = 2;
+                    break;
+
             }
-     
+        }
+        public void GameOver()
+        {
+            MessageBox.Show("Peux Mieux Faire xD");
+            Grid.Children.Remove(nourriture);
+            Grid.SetColumn(teckel, 2);
+            Grid.SetRow(teckel, 2);
+            _direction = 0;
         }
 
     }
