@@ -65,6 +65,7 @@ namespace ProjetTeckel
                 Grid.Children.Add(nourriture);
                 Grid.SetColumn(nourriture, yNourriture);
                 Grid.SetRow(nourriture, xNourriture);
+                
             }
             switch (_direction)
             {
@@ -117,6 +118,9 @@ namespace ProjetTeckel
             if (Grid.GetRow(teckel) == Grid.GetRow(nourriture) && Grid.GetColumn(teckel) == Grid.GetColumn(nourriture))
             {
                 Grid.Children.Remove(nourriture);
+                score++;
+                Score();
+
             }
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
@@ -144,15 +148,15 @@ namespace ProjetTeckel
         }
         public void GameOver()
         {
-            MessageBox.Show("Peux Mieux Faire xD");
+            MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score :" + score);
             Grid.Children.Remove(nourriture);
             Grid.SetColumn(teckel, 2);
             Grid.SetRow(teckel, 2);
             _direction = 0;
         }
-        /*private void UpdateGameStatus()
+        private void Score()
         {
-            this.PrjTeckel.Text = currentScore.ToString();
-        }*/
+            this.PrjTeckel.Title = "Teckel - Score : " + score;
+        }
     }
 }
