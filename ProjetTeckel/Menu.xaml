@@ -10,36 +10,50 @@
     Height="700"
     mc:Ignorable="d">
     <Grid>
-        <Rectangle x:Name="rMenu" Stroke="#FFD97733" />
+        <Rectangle
+            x:Name="rMenu"
+            Margin="0,1,0,-1"
+            Stroke="#FFD97733" />
 
         <Button
             x:Name="Jouer"
             Width="150"
-            Height="52"
-            Margin="176,0,374,0"
+            Height="50"
+            Margin="200,0,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="#FF60F762"
             Click="Jouer_Click"
-            Content="Jouer" FontFamily="Browood-Regular.ttf" />
+            Content="Jouer"
+            FontFamily="Browood-Regular.ttf " />
         <Button
             x:Name="Annuler"
             Width="150"
-            Height="52"
-            Margin="414,0,136,0"
+            Height="50"
+            Margin="350,0,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Background="#FFDA4435"
             Click="Annuler_Click"
             Content="Annuler"
             RenderTransformOrigin="0.972,0.278" />
         <TextBlock
-            Width="40"
-            Height="18"
-            Margin="0,28,0,0"
-            HorizontalAlignment="Center"
+            Width="178"
+            Height="64"
+            Margin="253,25,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="Black"
+            FontFamily="72 Black"
+            FontSize="48"
             Foreground="#FFDF9361"
-            TextWrapping="Wrap"><Run Language="fr-fr" Text="TECKEL" /></TextBlock>
+            TextWrapping="Wrap"><Run
+                FontFamily="Browood-Regular.ttf"
+                Language="fr-fr"
+                Text=" " /><Run FontFamily="Browood-Regular" Text="TECKEL" /><Run
+                FontFamily="Browood-Regular"
+                Language="fr-fr"
+                Text="  " /></TextBlock>
 
     </Grid>
 </Window>

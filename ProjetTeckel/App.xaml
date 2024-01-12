@@ -1,9 +1,12 @@
-﻿<Application x:Class="ProjetTeckel.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ProjetTeckel"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="ProjetTeckel.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ProjetTeckel"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="Browood-Regular.ttf">
+            <Setter Property="TextElement.FontFamily" Value="font/Browood-Regular.ttf" />
+        </Style>
     </Application.Resources>
 </Application>
