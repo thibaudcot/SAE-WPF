@@ -89,7 +89,7 @@ namespace ProjetTeckel
             {
 
                 case 1://up
-                    if (ligneRec > 0)
+                    if (ligneRec > 1)
                     {
                         ligneRec = ligneRec - 1;
                         Grid.SetRow(teckel, ligneRec);//déplace le rectangle sur ces nouvelles coordonnées
