@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:ProjetTeckel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Menu"
-    Width="500"
-    Height="300"
+    Width="700"
+    Height="700"
     mc:Ignorable="d">
     <Grid>
         <Rectangle x:Name="rMenu" Stroke="#FFD97733" />
@@ -16,18 +16,16 @@
             x:Name="Jouer"
             Width="150"
             Height="52"
-            Margin="28,0,0,0"
-            HorizontalAlignment="Left"
+            Margin="176,0,374,0"
             VerticalAlignment="Center"
             Background="#FF60F762"
             Click="Jouer_Click"
-            Content="Jouer" />
+            Content="Jouer" FontFamily="Browood-Regular.ttf" />
         <Button
             x:Name="Annuler"
             Width="150"
             Height="52"
-            Margin="304,0,0,0"
-            HorizontalAlignment="Left"
+            Margin="414,0,136,0"
             VerticalAlignment="Center"
             Background="#FFDA4435"
             Click="Annuler_Click"
@@ -35,8 +33,8 @@
             RenderTransformOrigin="0.972,0.278" />
         <TextBlock
             Width="40"
-            Height="17"
-            Margin="0,33,0,0"
+            Height="18"
+            Margin="0,28,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Background="Black"
