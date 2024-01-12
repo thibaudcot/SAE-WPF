@@ -21,6 +21,7 @@ namespace ProjetTeckel
 
     public partial class MainWindow : Window
     {
+        int score = 0;
             int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
             Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
             Random random = new Random();
@@ -91,7 +92,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 3: //right
-                    if (colRec < 12)
+                    if (colRec < 18)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
@@ -102,7 +103,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 4: //down
-                    if (ligneRec < 15)
+                    if (ligneRec < 16)
                     {
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel,ligneRec);
@@ -149,6 +150,9 @@ namespace ProjetTeckel
             Grid.SetRow(teckel, 2);
             _direction = 0;
         }
-
+        private void UpdateGameStatus()
+        {
+            this.PrjTeckel.Text = currentScore.ToString();
+        }
     }
 }
