@@ -179,9 +179,11 @@ namespace ProjetTeckel
         {
             MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score);
             Grid.Children.Remove(nourriture);
+            Grid.Children.Remove(chocolat);
             Grid.SetColumn(teckel, 2);
             Grid.SetRow(teckel, 2);
             _direction = 0;
+            score = 0;
         }
         private void Score()
         {
