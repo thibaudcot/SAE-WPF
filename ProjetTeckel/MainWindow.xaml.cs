@@ -80,7 +80,7 @@ namespace ProjetTeckel
                 chocolat.Height = teckel.Height;
                 //Chocolat pour le malus
                 ImageBrush imgChocolat = new ImageBrush();
-                imgChocolat.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\chocolat.jpg"));
+                imgChocolat.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\chocolat.png"));
                 chocolat.Fill = imgChocolat;
                 //On l'ajoute à la grille
                 Grid.Children.Add(chocolat);
