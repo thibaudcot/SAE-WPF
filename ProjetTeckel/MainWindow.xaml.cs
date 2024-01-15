@@ -77,9 +77,9 @@ namespace ProjetTeckel
                 Grid.SetRow(nourriture, xNourriture);
 
             }
-            if (!Grid.Children.Contains(chocolat) && _direction != 0 && Grid.Children.Count < 3)
+            if (!Grid.Children.Contains(chocolat) && _direction != 0)
             {
-                for (int iter = 1; iter < 10; iter++)
+                for (int iter = 1; iter < 20; iter++)
                 {
                     int xChocolat = randomC.Next(0, 17);
                     int yChocolat = randomC.Next(0, 20);
