@@ -36,12 +36,15 @@ namespace ProjetTeckel
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
+
             if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
+            score = 0;
+            Score();
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -89,7 +92,7 @@ namespace ProjetTeckel
             {
 
                 case 1://up
-                    if (ligneRec > 1)
+                    if (ligneRec > 0)
                     {
                         ligneRec = ligneRec - 1;
                         Grid.SetRow(teckel, ligneRec);//déplace le rectangle sur ces nouvelles coordonnées
@@ -111,7 +114,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 3: //right
-                    if (colRec < 18)
+                    if (colRec < 20)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
@@ -122,7 +125,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 4: //down
-                    if (ligneRec < 16)
+                    if (ligneRec < 18)
                     {
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel,ligneRec);

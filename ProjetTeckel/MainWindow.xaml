@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetTeckel"
         mc:Ignorable="d"
-        Title="Teckel - Score : 0" Height="465" Width="472" KeyDown="PrjTeckel_KeyDown">
-    <Grid x:Name="Grid" Height="450" Width="476" HorizontalAlignment="Right" VerticalAlignment="Center" Background="ForestGreen" Margin="0,0,-2,0">
+        Title="Teckel - Score : 0" Height="490" Width="525" KeyDown="PrjTeckel_KeyDown">
+    <Grid x:Name="Grid" Background="ForestGreen">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="25" />
@@ -25,7 +25,8 @@
             <RowDefinition Height="25" />
             <RowDefinition Height="25" />
             <RowDefinition Height="25" />
-            <RowDefinition Height="4.98"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
@@ -47,6 +48,9 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+
         </Grid.ColumnDefinitions>
         <Rectangle x:Name="teckel" HorizontalAlignment="Center" Margin="0,0,0,1" Width="25" RenderTransformOrigin="-0.118,-0.168" Grid.Row="2" Grid.Column="1" />
     </Grid>
