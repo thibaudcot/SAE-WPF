@@ -53,9 +53,9 @@ namespace ProjetTeckel
             int colRec = Grid.GetColumn(teckel);
 
             //on choisit des coordonnées aléatoire pour la nourriture
-            int xNourriture = randomN.Next(0, 18);
+            int xNourriture = randomN.Next(0, 17);
             int yNourriture = randomN.Next(0, 20);
-            int xChocolat = randomN.Next(0, 18);
+            int xChocolat = randomN.Next(0, 17);
             int yChocolat = randomN.Next(0, 20);
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
@@ -125,7 +125,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 4: //down
-                    if (ligneRec < 18)
+                    if (ligneRec < 17)
                     {
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel,ligneRec);
@@ -180,13 +180,36 @@ namespace ProjetTeckel
         }
         public void GameOver()
         {
-            MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score);
-            Grid.Children.Remove(nourriture);
-            Grid.Children.Remove(chocolat);
-            Grid.SetColumn(teckel, 2);
-            Grid.SetRow(teckel, 2);
-            _direction = 0;
-            score = 0;
+            ImageBrush imgTeckel = new ImageBrush();
+            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
+            teckel.Fill = imgTeckel;
+            MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?","Teckel", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Grid.Children.Remove(nourriture);
+                    Grid.Children.Remove(chocolat);
+                    Grid.SetColumn(teckel, 2);
+                    Grid.SetRow(teckel, 2);
+                    _direction = 0;
+                    score = 0;
+                    imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+                    teckel.Fill = imgTeckel;
+                    Menu ChoixMenu = new Menu();
+                    ChoixMenu.ShowDialog();
+
+
+                    if (ChoixMenu.DialogResult == false)
+                        Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.No:
+                    Close();
+                    break;
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Nevermind then...", "Teckel");
+                    break;
+            }
+            
         }
         private void Score()
         {
