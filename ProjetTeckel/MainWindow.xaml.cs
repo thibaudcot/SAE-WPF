@@ -53,10 +53,10 @@ namespace ProjetTeckel
             int colRec = Grid.GetColumn(teckel);
 
             //on choisit des coordonnées aléatoire pour la nourriture
-            int xNourriture = randomN.Next(0, Grid.RowDefinitions.Count);
-            int yNourriture = randomN.Next(0, Grid.ColumnDefinitions.Count);
-            int xChocolat = randomN.Next(0, Grid.RowDefinitions.Count);
-            int yChocolat = randomN.Next(0, Grid.ColumnDefinitions.Count);
+            int xNourriture = randomN.Next(0, 18);
+            int yNourriture = randomN.Next(0, 20);
+            int xChocolat = randomN.Next(0, 18);
+            int yChocolat = randomN.Next(0, 20);
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
             if (!Grid.Children.Contains(nourriture) && _direction != 0)
