@@ -36,12 +36,15 @@ namespace ProjetTeckel
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
+
             if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
+            score = 0;
+            Score();
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -50,10 +53,10 @@ namespace ProjetTeckel
             int colRec = Grid.GetColumn(teckel);
 
             //on choisit des coordonnées aléatoire pour la nourriture
-            int xNourriture = randomN.Next(0, Grid.RowDefinitions.Count);
-            int yNourriture = randomN.Next(0, Grid.ColumnDefinitions.Count);
-            int xChocolat = randomN.Next(0, Grid.RowDefinitions.Count);
-            int yChocolat = randomN.Next(0, Grid.ColumnDefinitions.Count);
+            int xNourriture = randomN.Next(0, 18);
+            int yNourriture = randomN.Next(0, 20);
+            int xChocolat = randomN.Next(0, 18);
+            int yChocolat = randomN.Next(0, 20);
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
             if (!Grid.Children.Contains(nourriture) && _direction != 0)
@@ -111,7 +114,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 3: //right
-                    if (colRec < 18)
+                    if (colRec < 20)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
@@ -122,7 +125,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 4: //down
-                    if (ligneRec < 16)
+                    if (ligneRec < 18)
                     {
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel,ligneRec);
