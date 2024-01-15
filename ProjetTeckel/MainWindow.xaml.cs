@@ -15,12 +15,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using System.Diagnostics;
+using System.Windows.Media.Converters;
 
 namespace ProjetTeckel
 {
 
     public partial class MainWindow : Window
     {
+        List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
         private readonly List<Rectangle> _chocolat = new List<Rectangle>();
         int score = 0;
             int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
@@ -49,6 +52,7 @@ namespace ProjetTeckel
             timer.Start();
             score = 0;
             Score();
+            
         }
         void timer_Tick(object sender, EventArgs e)
         {
@@ -59,7 +63,7 @@ namespace ProjetTeckel
             //on choisit des coordonnées aléatoire pour la nourriture
             int xNourriture = randomN.Next(0, 17);
             int yNourriture = randomN.Next(0, 20);
-            
+
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
             if (!Grid.Children.Contains(nourriture) && _direction != 0)
@@ -77,10 +81,11 @@ namespace ProjetTeckel
                 Grid.SetRow(nourriture, xNourriture);
 
             }
-            if (!Grid.Children.Contains(chocolat) && _direction != 0)
+            if (!Grid.Children.Contains(chocolat) && _direction != 0 && Grid.Children.Count < 10)
             {
-                for (int iter = 1; iter < 20; iter++)
+                for (int i = 0; i <= 1; i++)
                 {
+                    
                     int xChocolat = randomC.Next(0, 17);
                     int yChocolat = randomC.Next(0, 20);
                     // on crée une instance de bouton
@@ -96,14 +101,20 @@ namespace ProjetTeckel
                     chocolat.Fill = imgChocolat;
 
                     // on lui donne le même nom, comme ça on pourra l'appeler s'il faut rajouter des événements plus tard.
-                    chocolat.Name = "chocolat" + iter;
+                    chocolat.Name = "chocolat" + i;
 
                     Grid.Children.Add(chocolat);
                     Grid.SetColumn(chocolat, yChocolat);
                     Grid.SetRow(chocolat, xChocolat);
+                    
                 }
 
+
             }
+           
+          
+        
+
             switch (_direction)
             {
 
@@ -159,13 +170,17 @@ namespace ProjetTeckel
                 Score();
 
             }
-            if (Grid.GetRow(teckel) == Grid.GetRow(chocolat) && Grid.GetColumn(teckel) == Grid.GetColumn(chocolat))
+            foreach(Rectangle chocolat in _chocolat)
             {
-                Grid.Children.Remove(chocolat);
-                score--;
-                Score();
+                if (Grid.GetRow(chocolat) == Grid.GetRow(teckel) && Grid.GetColumn(teckel) == Grid.GetColumn(chocolat))
+                {
+                    Grid.Children.Remove(chocolat);
+                    score--;
+                    Score();
 
+                }
             }
+            
             if(score < 0)
             {
                 GameOver();
@@ -234,5 +249,10 @@ namespace ProjetTeckel
         {
 
         }*/
+    }
+    public class ChocolatInfo
+    {
+        public int Numero { get; set; }
+        public Rectangle Rectangle { get; set; }
     }
 }
