@@ -21,7 +21,8 @@ namespace ProjetTeckel
 
     public partial class MainWindow : Window
     {
-            int score = 0;
+        private readonly List<Rectangle> _chocolat = new List<Rectangle>();
+        int score = 0;
             int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
             Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
             Random randomN = new Random();
@@ -43,7 +44,7 @@ namespace ProjetTeckel
             if (ChoixMenu.DialogResult == false) 
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
+            timer.Interval = TimeSpan.FromMilliseconds(100); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
             score = 0;
@@ -58,8 +59,7 @@ namespace ProjetTeckel
             //on choisit des coordonnées aléatoire pour la nourriture
             int xNourriture = randomN.Next(0, 17);
             int yNourriture = randomN.Next(0, 20);
-            int xChocolat = randomN.Next(0, 17);
-            int yChocolat = randomN.Next(0, 20);
+            
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
             if (!Grid.Children.Contains(nourriture) && _direction != 0)
@@ -77,18 +77,31 @@ namespace ProjetTeckel
                 Grid.SetRow(nourriture, xNourriture);
 
             }
-            if (!Grid.Children.Contains(chocolat) && _direction != 0)
+            if (!Grid.Children.Contains(chocolat) && _direction != 0 && Grid.Children.Count < 3)
             {
-                chocolat.Width = teckel.Width;
-                chocolat.Height = teckel.Height;
-                //Chocolat pour le malus
-                ImageBrush imgChocolat = new ImageBrush();
-                imgChocolat.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\chocolat.png"));
-                chocolat.Fill = imgChocolat;
-                //On l'ajoute à la grille
-                Grid.Children.Add(chocolat);
-                Grid.SetColumn(chocolat, yChocolat);
-                Grid.SetRow(chocolat, xChocolat);
+                for (int iter = 1; iter < 10; iter++)
+                {
+                    int xChocolat = randomC.Next(0, 17);
+                    int yChocolat = randomC.Next(0, 20);
+                    // on crée une instance de bouton
+                    Rectangle chocolat = new Rectangle();
+
+                    // comme on le voit sur l'image, tous les boutons ont la même taille, donc on généralise les dimensions par 75*75
+                    chocolat.Width = teckel.Width;
+                    chocolat.Height = teckel.Height;
+
+                    // changeons un peu de couleur ! un beau gris...
+                    ImageBrush imgChocolat = new ImageBrush();
+                    imgChocolat.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\chocolat.png"));
+                    chocolat.Fill = imgChocolat;
+
+                    // on lui donne le même nom, comme ça on pourra l'appeler s'il faut rajouter des événements plus tard.
+                    chocolat.Name = "chocolat" + iter;
+
+                    Grid.Children.Add(chocolat);
+                    Grid.SetColumn(chocolat, yChocolat);
+                    Grid.SetRow(chocolat, xChocolat);
+                }
 
             }
             switch (_direction)
@@ -160,8 +173,7 @@ namespace ProjetTeckel
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
         {
-            int ligneRec = Grid.GetRow(teckel);
-            int colRec = Grid.GetColumn(teckel);
+
             switch (e.Key.ToString())
             {
                 case "Up":
@@ -218,5 +230,9 @@ namespace ProjetTeckel
         {
             this.PrjTeckel.Title = "Teckel - Score : " + score;
         }
+        /*private void Chocolat()
+        {
+
+        }*/
     }
 }
