@@ -17,6 +17,9 @@
     <None Update="image\corps.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="image\map.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="image\menu.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

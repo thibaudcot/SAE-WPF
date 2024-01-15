@@ -30,6 +30,9 @@ namespace ProjetTeckel
         public MainWindow()
         {
             InitializeComponent();
+            ImageBrush Map = new ImageBrush();
+            Map.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\map.png"));
+            Grid.Background = Map;
             ImageBrush imgTeckel = new ImageBrush();
             imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
             teckel.Fill = imgTeckel;
@@ -114,7 +117,7 @@ namespace ProjetTeckel
                     }
                     break;
                 case 3: //right
-                    if (colRec < 20)
+                    if (colRec < 19)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjetTeckel"
         mc:Ignorable="d"
         Title="Teckel - Score : 0" Height="490" Width="525" KeyDown="PrjTeckel_KeyDown">
-    <Grid x:Name="Grid" Background="ForestGreen">
+    <Grid x:Name="Grid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="25" />
