@@ -177,7 +177,6 @@ namespace ProjetTeckel
                     Grid.Children.Remove(chocolat);
                     score--;
                     Score();
-
                 }
             }
             
