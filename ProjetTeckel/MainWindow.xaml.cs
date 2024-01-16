@@ -75,28 +75,6 @@ namespace ProjetTeckel
             Score();
             
         }
-        private void ChangerDirectionImage(int direction)
-        {
-            // Changer l'image en fonction de la direction
-            switch (direction)
-            {
-                case 1: // Haut
-                    teckel.Fill = imgTeckelHaut;
-                    break;
-
-                case 2: // Gauche
-                    teckel.Fill = imgTeckelGauche;
-                    break;
-
-                case 3: // Droite
-                    teckel.Fill = imgTeckelDroite;
-                    break;
-
-                case 4: // Bas
-                    teckel.Fill = imgTeckelBas;
-                    break;
-            }
-        }
 
         void timer_Tick(object sender, EventArgs e)
         {
