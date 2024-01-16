@@ -107,8 +107,6 @@ namespace ProjetTeckel
             //on choisit des coordonnées aléatoire pour la nourriture
             int xNourriture = randomN.Next(0, 17);
             int yNourriture = randomN.Next(0, 20);
-            int xChocolat = randomC.Next(0, 17);
-            int yChocolat = randomC.Next(0, 20);
 
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
@@ -169,7 +167,7 @@ namespace ProjetTeckel
                     {
                         ligneRec = ligneRec - 1;
                         Grid.SetRow(teckel, ligneRec);
-                        ChangerDirectionImage(_direction);
+                        teckel.Fill = imgTeckelHaut;
                     }
                     else
                     {
@@ -182,7 +180,7 @@ namespace ProjetTeckel
                     {
                         colRec = colRec - 1;
                         Grid.SetColumn(teckel, colRec);
-                        ChangerDirectionImage(_direction);
+                        teckel.Fill = imgTeckelGauche;
                     }
                     else
                     {
@@ -195,7 +193,7 @@ namespace ProjetTeckel
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
-                        ChangerDirectionImage(_direction);
+                        teckel.Fill = imgTeckelDroite;
                     }
                     else
                     {
@@ -208,7 +206,7 @@ namespace ProjetTeckel
                     {
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel, ligneRec);
-                        ChangerDirectionImage(_direction);
+                        teckel.Fill = imgTeckelBas;
                     }
                     else
                     {
