@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
-
 namespace ProjetTeckel
 {
 
@@ -27,20 +26,44 @@ namespace ProjetTeckel
             Random randomN = new Random();
             Rectangle chocolat = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
             Random randomC = new Random();
+            List<Rectangle> corpsChien = new List<Rectangle>(); // Nouvelle liste pour stocker les parties du corps du chien
+            ImageBrush imgTeckelHaut;
+            ImageBrush imgTeckelGauche;
+            ImageBrush imgTeckelDroite;
+            ImageBrush imgTeckelBas;
+
         public MainWindow()
         {
             InitializeComponent();
+            music.Source = new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/uranus.mp3");
+            music.Play();
+
             ImageBrush Map = new ImageBrush();
             Map.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\map.png"));
             Grid.Background = Map;
-            ImageBrush imgTeckel = new ImageBrush();
-            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
-            teckel.Fill = imgTeckel;
+            // Initialisation des images pour différentes directions
+            imgTeckelHaut = new ImageBrush();
+            imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+
+            imgTeckelGauche = new ImageBrush();
+            imgTeckelGauche.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetegauche.png"));
+
+            imgTeckelDroite = new ImageBrush();
+            imgTeckelDroite.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetedroite.png"));
+
+            imgTeckelBas = new ImageBrush();
+            imgTeckelBas.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetebas.png"));
+
+            teckel.Fill = imgTeckelHaut;
+
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
 
-            if (ChoixMenu.DialogResult == false) 
+
+
+
+            if (ChoixMenu.DialogResult == false)
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
@@ -48,7 +71,31 @@ namespace ProjetTeckel
             timer.Start();
             score = 0;
             Score();
+            
         }
+        private void ChangerDirectionImage(int direction)
+        {
+            // Changer l'image en fonction de la direction
+            switch (direction)
+            {
+                case 1: // Haut
+                    teckel.Fill = imgTeckelHaut;
+                    break;
+
+                case 2: // Gauche
+                    teckel.Fill = imgTeckelGauche;
+                    break;
+
+                case 3: // Droite
+                    teckel.Fill = imgTeckelDroite;
+                    break;
+
+                case 4: // Bas
+                    teckel.Fill = imgTeckelBas;
+                    break;
+            }
+        }
+
         void timer_Tick(object sender, EventArgs e)
         {
             //on récupère les coordonnées du snake sur la grille
@@ -58,8 +105,8 @@ namespace ProjetTeckel
             //on choisit des coordonnées aléatoire pour la nourriture
             int xNourriture = randomN.Next(0, 17);
             int yNourriture = randomN.Next(0, 20);
-            int xChocolat = randomN.Next(0, 17);
-            int yChocolat = randomN.Next(0, 20);
+            int xChocolat = randomC.Next(0, 17);
+            int yChocolat = randomC.Next(0, 20);
 
             //Si aucune nourriture n'est présente alors on l'ajoute 
             if (!Grid.Children.Contains(nourriture) && _direction != 0)
@@ -94,44 +141,51 @@ namespace ProjetTeckel
             switch (_direction)
             {
 
-                case 1://up
+                case 1: // Haut
                     if (ligneRec > 0)
                     {
                         ligneRec = ligneRec - 1;
-                        Grid.SetRow(teckel, ligneRec);//déplace le rectangle sur ces nouvelles coordonnées
+                        Grid.SetRow(teckel, ligneRec);
+                        ChangerDirectionImage(_direction);
                     }
                     else
                     {
                         GameOver();
                     }
                     break;
-                case 2://left
+
+                case 2: // Gauche
                     if (colRec > 0)
                     {
                         colRec = colRec - 1;
                         Grid.SetColumn(teckel, colRec);
+                        ChangerDirectionImage(_direction);
                     }
                     else
                     {
                         GameOver();
                     }
                     break;
-                case 3: //right
+
+                case 3: // Droite
                     if (colRec < 19)
                     {
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
+                        ChangerDirectionImage(_direction);
                     }
                     else
                     {
                         GameOver();
                     }
                     break;
-                case 4: //down
+
+                case 4: // Bas
                     if (ligneRec < 17)
                     {
                         ligneRec = ligneRec + 1;
-                        Grid.SetRow(teckel,ligneRec);
+                        Grid.SetRow(teckel, ligneRec);
+                        ChangerDirectionImage(_direction);
                     }
                     else
                     {
@@ -144,6 +198,7 @@ namespace ProjetTeckel
                 Grid.Children.Remove(nourriture);
                 score++;
                 Score();
+                AjouterPartieCorpsChien();
 
             }
             if (Grid.GetRow(teckel) == Grid.GetRow(chocolat) && Grid.GetColumn(teckel) == Grid.GetColumn(chocolat))
@@ -151,14 +206,66 @@ namespace ProjetTeckel
                 Grid.Children.Remove(chocolat);
                 score--;
                 Score();
+                // Retirer la dernière partie du corps
+                RetirerPartieCorpsChien();
+
 
             }
-            if(score < 0)
+            // Mettre à jour la position de la première partie du corps à la position actuelle de la tête
+            if (corpsChien.Count > 0)
+            {
+                Grid.SetColumn(corpsChien[0], Grid.GetColumn(teckel));
+                Grid.SetRow(corpsChien[0], Grid.GetRow(teckel));
+            }
+
+            // Déplacer chaque partie du corps vers la position de la partie précédente
+            for (int i = 1; i < corpsChien.Count; i++)
+            {
+                Grid.SetColumn(corpsChien[i], Grid.GetColumn(corpsChien[i - 1]));
+                Grid.SetRow(corpsChien[i], Grid.GetRow(corpsChien[i - 1]));
+            }
+
+
+            if (score < 0)
             {
                 GameOver();
             }
+
         }
-            private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
+        private void AjouterPartieCorpsChien()
+        {
+            Rectangle nouvellePartieCorps = new Rectangle();
+            nouvellePartieCorps.Width = teckel.Width;
+            nouvellePartieCorps.Height = teckel.Height;
+
+            ImageBrush imgPartieCorps = new ImageBrush();
+            imgPartieCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png"));
+            nouvellePartieCorps.Fill = imgPartieCorps;
+
+            // Ajouter la nouvelle partie du corps à la liste
+            corpsChien.Insert(0, nouvellePartieCorps);
+
+            // Ajouter la nouvelle partie du corps à la grille
+            Grid.Children.Insert(1, nouvellePartieCorps);
+
+            // Mettre à jour la position de chaque partie du corps
+            for (int i = 0; i < corpsChien.Count; i++)
+            {
+                Grid.SetColumn(corpsChien[i], Grid.GetColumn(teckel));
+                Grid.SetRow(corpsChien[i], Grid.GetRow(teckel));
+            }
+        }
+        private void RetirerPartieCorpsChien()
+        {
+            if (corpsChien.Count > 0)
+            {
+                // Retirer la dernière partie du corps de la grille et de la liste
+                Grid.Children.Remove(corpsChien.Last());
+                corpsChien.RemoveAt(corpsChien.Count - 1);
+            }
+        }
+
+        private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
         {
             int ligneRec = Grid.GetRow(teckel);
             int colRec = Grid.GetColumn(teckel);
@@ -181,6 +288,7 @@ namespace ProjetTeckel
 
             }
         }
+
         public void GameOver()
         {
             ImageBrush imgTeckel = new ImageBrush();
