@@ -287,7 +287,14 @@ namespace ProjetTeckel
                     Grid.SetColumn(corpsChien[i], Grid.GetColumn(teckel));
                     Grid.SetRow(corpsChien[i], Grid.GetRow(teckel));
                 }
+            // Vérifier si le score est supérieur à 0 avant de retirer une partie du corps
+            if (score > 0)
+            {
+                RetirerPartieCorpsChien();
+                score--; // Diminuer le score lorsqu'un chocolat est mangé
+                Score();
             }
+        }
             private void RetirerPartieCorpsChien()
             {
                 if (corpsChien.Count > 0)
