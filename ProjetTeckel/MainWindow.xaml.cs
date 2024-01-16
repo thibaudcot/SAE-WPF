@@ -134,7 +134,6 @@ namespace ProjetTeckel
                     Score();
                 }
 
-                // Ajoutez ici le code pour retirer le chocolat si nécessaire
                 foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
                 {
                     int rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
@@ -358,10 +357,7 @@ namespace ProjetTeckel
             {
                 this.PrjTeckel.Title = "Teckel - Score : " + score;
             }
-            /*private void Chocolat()
-            {
 
-            }*/
         public class ChocolatInfo
         {
             public int Numero { get; set; }
