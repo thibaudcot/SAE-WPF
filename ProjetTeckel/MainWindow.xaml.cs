@@ -127,9 +127,6 @@ namespace ProjetTeckel
                     Grid.SetRow(chocolat, xChocolat);
                 }
 
-                // ...
-
-                // Vérifier la collision avec la nourriture
                 if (Grid.GetRow(teckel) == Grid.GetRow(nourriture) && Grid.GetColumn(teckel) == Grid.GetColumn(nourriture))
                 {
                     Grid.Children.Remove(nourriture);
