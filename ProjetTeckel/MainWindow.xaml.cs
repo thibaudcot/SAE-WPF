@@ -21,7 +21,6 @@ namespace ProjetTeckel
     public partial class MainWindow : Window
     {
         List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
-        private readonly List<Rectangle> _chocolat = new List<Rectangle>();
         int score = 0;
             int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
             Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
@@ -107,11 +106,15 @@ namespace ProjetTeckel
             {
                 for (int i = 0; i <= 1; i++)
                 {
-                    
+                    ChocolatInfo chocolatInfo = new ChocolatInfo
+                    {
+                        Numero = i,
+                        Rectangle = chocolat
+                    };
                     int xChocolat = randomC.Next(0, 17);
                     int yChocolat = randomC.Next(0, 20);
                     // on crée une instance de bouton
-                    Rectangle chocolat = new Rectangle();
+                    //Rectangle chocolat = new Rectangle();
 
                     // comme on le voit sur l'image, tous les boutons ont la même taille, donc on généralise les dimensions par 75*75
                     chocolat.Width = teckel.Width;
