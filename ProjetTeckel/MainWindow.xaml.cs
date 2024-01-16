@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,23 +16,25 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using static ProjetTeckel.MainWindow;
+
 namespace ProjetTeckel
 {
 
     public partial class MainWindow : Window
     {
+        //Rectangle chocolat = new Rectangle();
         List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
         int score = 0;
-            int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
-            Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
-            Random randomN = new Random();
-            Rectangle chocolat = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
-            Random randomC = new Random();
-            List<Rectangle> corpsChien = new List<Rectangle>(); // Nouvelle liste pour stocker les parties du corps du chien
-            ImageBrush imgTeckelHaut;
-            ImageBrush imgTeckelGauche;
-            ImageBrush imgTeckelDroite;
-            ImageBrush imgTeckelBas;
+        int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
+        Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
+        Random randomN = new Random();
+        Random randomC = new Random();
+        List<Rectangle> corpsChien = new List<Rectangle>(); // Nouvelle liste pour stocker les parties du corps du chien
+        ImageBrush imgTeckelHaut;
+        ImageBrush imgTeckelGauche;
+        ImageBrush imgTeckelDroite;
+        ImageBrush imgTeckelBas;
 
         public MainWindow()
         {
@@ -72,7 +75,7 @@ namespace ProjetTeckel
             timer.Start();
             score = 0;
             Score();
-            
+
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -102,43 +105,60 @@ namespace ProjetTeckel
                 Grid.SetRow(nourriture, xNourriture);
 
             }
-            if (!Grid.Children.Contains(chocolat) && _direction != 0 && Grid.Children.Count < 10)
+            if (Grid.Children.Count < 3)
             {
-                for (int i = 0; i <= 1; i++)
+                for (int i = 0; i <= 10; i++)
                 {
-                    ChocolatInfo chocolatInfo = new ChocolatInfo
-                    {
-                        Numero = i,
-                        Rectangle = chocolat
-                    };
+                    Rectangle chocolat = new Rectangle();
                     int xChocolat = randomC.Next(0, 17);
                     int yChocolat = randomC.Next(0, 20);
-                    // on crée une instance de bouton
-                    //Rectangle chocolat = new Rectangle();
 
-                    // comme on le voit sur l'image, tous les boutons ont la même taille, donc on généralise les dimensions par 75*75
                     chocolat.Width = teckel.Width;
                     chocolat.Height = teckel.Height;
 
-                    // changeons un peu de couleur ! un beau gris...
                     ImageBrush imgChocolat = new ImageBrush();
                     imgChocolat.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\chocolat.png"));
                     chocolat.Fill = imgChocolat;
 
-                    // on lui donne le même nom, comme ça on pourra l'appeler s'il faut rajouter des événements plus tard.
-                    chocolat.Name = "chocolat" + i;
+                    listeChocolats.Add(new ChocolatInfo { Rectangle = chocolat, Numero = i });
 
                     Grid.Children.Add(chocolat);
                     Grid.SetColumn(chocolat, yChocolat);
                     Grid.SetRow(chocolat, xChocolat);
-                    
+                }
+
+                // ...
+
+                // Vérifier la collision avec la nourriture
+                if (Grid.GetRow(teckel) == Grid.GetRow(nourriture) && Grid.GetColumn(teckel) == Grid.GetColumn(nourriture))
+                {
+                    Grid.Children.Remove(nourriture);
+                    score++;
+                    Score();
+                }
+
+                // Ajoutez ici le code pour retirer le chocolat si nécessaire
+                foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
+                {
+                    int rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
+                    int columnChocolat = Grid.GetColumn(chocolatInfo.Rectangle);
+
+                    Debug.WriteLine($"Chocolat {chocolatInfo.Numero} - Row: {rowChocolat}, Column: {columnChocolat}");
+
+                    if (rowChocolat == Grid.GetRow(teckel) && columnChocolat == Grid.GetColumn(teckel))
+                    {
+                        Debug.WriteLine($"Collision avec le chocolat {chocolatInfo.Numero} !");
+                        Grid.Children.Remove(chocolatInfo.Rectangle);
+                        listeChocolats.Remove(chocolatInfo);
+                    }
                 }
 
 
+
             }
-           
-          
-        
+
+
+
 
             switch (_direction)
             {
@@ -201,18 +221,32 @@ namespace ProjetTeckel
                 score++;
                 Score();
                 AjouterPartieCorpsChien();
-
             }
-            if (Grid.GetRow(teckel) == Grid.GetRow(chocolat) && Grid.GetColumn(teckel) == Grid.GetColumn(chocolat))
+
+            foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
             {
-                Grid.Children.Remove(chocolat);
-                score--;
-                Score();
-                // Retirer la dernière partie du corps
-                RetirerPartieCorpsChien();
+                // Obtenez les coordonnées du chocolat dans la grille
+                int rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
+                int columnChocolat = Grid.GetColumn(chocolatInfo.Rectangle);
+                int rowTeckel = Grid.GetRow(teckel);
+                int columnTeckel = Grid.GetColumn(teckel);
 
+                // Vérifiez s'ils se trouvent dans la même cellule de la grille
+                if (rowTeckel == rowChocolat && columnTeckel == columnChocolat)
+                {
+                    // Affichez les coordonnées pour déboguer
+                    Debug.WriteLine($"Collision avec chocolat {chocolatInfo.Numero} - Row: {rowChocolat}, Column: {columnChocolat}");
 
+                    // Supprimez le rectangle de la grille et de la liste
+                    Grid.Children.Remove(chocolatInfo.Rectangle);
+                    listeChocolats.Remove(chocolatInfo);
+                    score--;
+                    Score();
+                }
             }
+
+
+
             // Mettre à jour la position de la première partie du corps à la position actuelle de la tête
             if (corpsChien.Count > 0)
             {
@@ -234,107 +268,109 @@ namespace ProjetTeckel
             }
 
         }
-        private void AjouterPartieCorpsChien()
-        {
-            Rectangle nouvellePartieCorps = new Rectangle();
-            nouvellePartieCorps.Width = teckel.Width;
-            nouvellePartieCorps.Height = teckel.Height;
-
-            ImageBrush imgPartieCorps = new ImageBrush();
-            imgPartieCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png"));
-            nouvellePartieCorps.Fill = imgPartieCorps;
-
-            // Ajouter la nouvelle partie du corps à la liste
-            corpsChien.Insert(0, nouvellePartieCorps);
-
-            // Ajouter la nouvelle partie du corps à la grille
-            Grid.Children.Insert(1, nouvellePartieCorps);
-
-            // Mettre à jour la position de chaque partie du corps
-            for (int i = 0; i < corpsChien.Count; i++)
+    
+            private void AjouterPartieCorpsChien()
             {
-                Grid.SetColumn(corpsChien[i], Grid.GetColumn(teckel));
-                Grid.SetRow(corpsChien[i], Grid.GetRow(teckel));
+                Rectangle nouvellePartieCorps = new Rectangle();
+                nouvellePartieCorps.Width = teckel.Width;
+                nouvellePartieCorps.Height = teckel.Height;
+
+                ImageBrush imgPartieCorps = new ImageBrush();
+                imgPartieCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png"));
+                nouvellePartieCorps.Fill = imgPartieCorps;
+
+                // Ajouter la nouvelle partie du corps à la liste
+                corpsChien.Insert(0, nouvellePartieCorps);
+
+                // Ajouter la nouvelle partie du corps à la grille
+                Grid.Children.Insert(1, nouvellePartieCorps);
+
+                // Mettre à jour la position de chaque partie du corps
+                for (int i = 0; i < corpsChien.Count; i++)
+                {
+                    Grid.SetColumn(corpsChien[i], Grid.GetColumn(teckel));
+                    Grid.SetRow(corpsChien[i], Grid.GetRow(teckel));
+                }
             }
-        }
-        private void RetirerPartieCorpsChien()
-        {
-            if (corpsChien.Count > 0)
+            private void RetirerPartieCorpsChien()
             {
-                // Retirer la dernière partie du corps de la grille et de la liste
-                Grid.Children.Remove(corpsChien.Last());
-                corpsChien.RemoveAt(corpsChien.Count - 1);
+                if (corpsChien.Count > 0)
+                {
+                    // Retirer la dernière partie du corps de la grille et de la liste
+                    Grid.Children.Remove(corpsChien.Last());
+                    corpsChien.RemoveAt(corpsChien.Count - 1);
+                }
             }
-        }
 
-        private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            switch (e.Key.ToString())
+            private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
             {
-                case "Up":
-                    _direction = 1;
-                    break;
 
-                case "Down":
-                    _direction = 4;
-                    break;
+                switch (e.Key.ToString())
+                {
+                    case "Up":
+                        _direction = 1;
+                        break;
 
-                case "Right":
-                    _direction = 3;
-                    break;
-                case "Left":
-                    _direction = 2;
-                    break;
+                    case "Down":
+                        _direction = 4;
+                        break;
 
+                    case "Right":
+                        _direction = 3;
+                        break;
+                    case "Left":
+                        _direction = 2;
+                        break;
+
+                }
             }
-        }
 
-        public void GameOver()
-        {
-            ImageBrush imgTeckel = new ImageBrush();
-            imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
-            teckel.Fill = imgTeckel;
-            MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?","Teckel", MessageBoxButton.YesNoCancel);
-            switch (result)
+            public void GameOver()
             {
-                case MessageBoxResult.Yes:
-                    Grid.Children.Remove(nourriture);
-                    Grid.Children.Remove(chocolat);
+                ImageBrush imgTeckel = new ImageBrush();
+                imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
+                teckel.Fill = imgTeckel;
+                MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Grid.Children.Remove(nourriture);
                     Grid.SetColumn(teckel, 2);
-                    Grid.SetRow(teckel, 2);
-                    _direction = 0;
-                    score = 0;
-                    imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
-                    teckel.Fill = imgTeckel;
-                    Menu ChoixMenu = new Menu();
-                    ChoixMenu.ShowDialog();
+                        Grid.SetRow(teckel, 2);
+                        _direction = 0;
+                        score = 0;
+                        imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+                        teckel.Fill = imgTeckel;
+                        Menu ChoixMenu = new Menu();
+                        ChoixMenu.ShowDialog();
 
 
-                    if (ChoixMenu.DialogResult == false)
-                        Application.Current.Shutdown();
-                    break;
-                case MessageBoxResult.No:
-                    Close();
-                    break;
-                case MessageBoxResult.Cancel:
-                    MessageBox.Show("Nevermind then...", "Teckel");
-                    break;
+                        if (ChoixMenu.DialogResult == false)
+                            Application.Current.Shutdown();
+                        break;
+                    case MessageBoxResult.No:
+                        Close();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        MessageBox.Show("Nevermind then...", "Teckel");
+                        break;
+                }
+
             }
-            
-        }
-        private void Score()
-        {
-            this.PrjTeckel.Title = "Teckel - Score : " + score;
-        }
-        /*private void Chocolat()
-        {
+            private void Score()
+            {
+                this.PrjTeckel.Title = "Teckel - Score : " + score;
+            }
+            /*private void Chocolat()
+            {
 
-        }*/
-    }
-    public class ChocolatInfo
-    {
-        public int Numero { get; set; }
-        public Rectangle Rectangle { get; set; }
+            }*/
+        public class ChocolatInfo
+        {
+            public int Numero { get; set; }
+            public Rectangle Rectangle { get; set; }
+        }
     }
 }
+
+
