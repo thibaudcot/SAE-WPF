@@ -57,6 +57,8 @@
             <ColumnDefinition Width="25" />
 
         </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Scoretxt" Grid.Column="17" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="108" Height="24" FontFamily="Stencil" Margin="13,10,0,0" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
+        <TextBlock x:Name="MScoretxt" Grid.Column="15" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meilleur Score :" VerticalAlignment="Top" Width="135" Height="24" FontFamily="Stencil" Margin="5,2,0,0" Grid.RowSpan="2" Grid.ColumnSpan="6" Grid.Row="1"/>
         <Rectangle
             x:Name="teckel"
             Grid.Row="2"
@@ -72,7 +74,6 @@
             LoadedBehavior="Manual"
             Source="uranus/mp3"
             UnloadedBehavior="Manual" />
-        <TextBlock x:Name="Scoretxt" Grid.Column="17" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="108" Height="24" FontFamily="Stencil" Margin="13,10,0,0" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
     </Grid>
 
 
