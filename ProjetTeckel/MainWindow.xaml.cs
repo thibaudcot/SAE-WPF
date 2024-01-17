@@ -47,6 +47,7 @@ namespace ProjetTeckel
         int rowNourriture, columnNourriture;
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
+        int MeilleureScore;
 
         public MainWindow()
         {
@@ -343,7 +344,11 @@ namespace ProjetTeckel
             private void Score()
             {
                 this.Scoretxt.Text = "Score : " + score;
+            if (score > MeilleureScore)
+            {
+                MeilleureScore = score;
             }
+        }
 
         
     }
