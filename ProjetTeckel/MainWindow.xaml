@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:ProjetTeckel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="PrjTeckel"
-    Title="Teckel - Score : 0"
+    Title="Teckel"
     Width="525"
     Height="490"
     KeyDown="PrjTeckel_KeyDown"
@@ -72,6 +72,7 @@
             LoadedBehavior="Manual"
             Source="uranus/mp3"
             UnloadedBehavior="Manual" />
+        <TextBlock x:Name="Scoretxt" Grid.Column="19" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="100" Height="24" FontFamily="Stencil" Margin="0,10,0,0" Grid.RowSpan="2"/>
     </Grid>
 
 

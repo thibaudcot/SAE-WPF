@@ -75,7 +75,7 @@ namespace ProjetTeckel
             timer.Tick += timer_Tick;
             timer.Start();
             score = 0;
-            Score();
+            this.Scoretxt.Text = "Score : " + score;
 
         }
 
@@ -391,7 +391,7 @@ namespace ProjetTeckel
             }
             private void Score()
             {
-                this.PrjTeckel.Title = "Teckel - Score : " + score;
+                this.Scoretxt.Text = "Score : " + score;
             }
 
         
