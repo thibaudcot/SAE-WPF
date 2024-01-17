@@ -74,13 +74,13 @@ namespace ProjetTeckel
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
-            score = 0;
-            this.Scoretxt.Text = "Score : " + score;
+            
 
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
+            Score();
             //on récupère les coordonnées du snake sur la grille
             int ligneRec = Grid.GetRow(teckel);
             int colRec = Grid.GetColumn(teckel);
