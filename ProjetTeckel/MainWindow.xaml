@@ -72,7 +72,7 @@
             LoadedBehavior="Manual"
             Source="uranus/mp3"
             UnloadedBehavior="Manual" />
-        <TextBlock x:Name="Scoretxt" Grid.Column="19" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="100" Height="24" FontFamily="Stencil" Margin="0,10,0,0" Grid.RowSpan="2"/>
+        <TextBlock x:Name="Scoretxt" Grid.Column="18" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Score :" VerticalAlignment="Top" Width="109" Height="24" FontFamily="Stencil" Margin="0,10,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
     </Grid>
 
 
