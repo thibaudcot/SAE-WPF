@@ -26,6 +26,7 @@ namespace ProjetTeckel
     {
         List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
         List<OsInfo> listeOs = new List<OsInfo>();
+        ImageBrush imgTeckel = new ImageBrush();
         int score = 0;
         int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
         Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
@@ -310,7 +311,6 @@ namespace ProjetTeckel
 
             public void GameOver()
             {
-                ImageBrush imgTeckel = new ImageBrush();
                 imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
                 teckel.Fill = imgTeckel;
                 MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNoCancel);
