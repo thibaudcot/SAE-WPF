@@ -138,6 +138,13 @@ namespace ProjetTeckel
                     int xChocolat = randomC.Next(0, 17);
                     int yChocolat = randomC.Next(0, 20);
 
+                    // Générer des coordonnées aléatoires pour le chocolat en évitant l'emplacement de l'os
+                    do
+                    {
+                        xChocolat = randomC.Next(0, 17);
+                        yChocolat = randomC.Next(0, 20);
+                    } while (xChocolat == Grid.GetRow(nourriture) && yChocolat == Grid.GetColumn(nourriture));
+
                     chocolat.Width = teckel.Width;
                     chocolat.Height = teckel.Height;
 
@@ -309,7 +316,14 @@ namespace ProjetTeckel
                     Grid.SetColumn(corpsChien[i], Grid.GetColumn(teckel));
                     Grid.SetRow(corpsChien[i], Grid.GetRow(teckel));
                 }
+            // Vérifier si le score est supérieur à 0 avant de retirer une partie du corps
+            if (score > 0)
+            {
+                RetirerPartieCorpsChien();
+ 
+                Score();
             }
+        }
             private void RetirerPartieCorpsChien()
             {
                 if (corpsChien.Count > 0)
