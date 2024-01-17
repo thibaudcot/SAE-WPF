@@ -25,7 +25,7 @@ namespace ProjetTeckel
     public partial class MainWindow : Window
     {
         List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
-        List<NourritureInfo> listeNourriture = new List<NourritureInfo>();
+        List<OsInfo> listeOs = new List<OsInfo>();
         int score = 0;
         int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
         Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
@@ -85,7 +85,7 @@ namespace ProjetTeckel
             int ligneRec = Grid.GetRow(teckel);
             int colRec = Grid.GetColumn(teckel);
 
-            if(listeNourriture.Count == 0)
+            if(listeOs.Count == 0)
             {
                 for (int i = 0; i <= 2; i++)
                 {
@@ -100,7 +100,7 @@ namespace ProjetTeckel
                     imgOs.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\os.png"));
                     os.Fill = imgOs;
 
-                    listeNourriture.Add(new OsInfo { Rectangle = os, Numero = i });
+                    listeOs.Add(new OsInfo { Rectangle = os, Numero = i });
 
                     Grid.Children.Add(os);
                     Grid.SetColumn(os, yOs);
@@ -108,7 +108,7 @@ namespace ProjetTeckel
                 }
                 
             }
-            foreach (OsInfo osInfo in listeNourriture.ToList())
+            foreach (OsInfo osInfo in listeOs.ToList())
             {
                 // Obtenez les coordonnées du chocolat dans la grille
                 int rowNourriture = Grid.GetRow(osInfo.Rectangle);
@@ -124,7 +124,7 @@ namespace ProjetTeckel
 
                     // Supprimez le rectangle de la grille et de la liste
                     Grid.Children.Remove(osInfo.Rectangle);
-                    listeNourriture.Remove(osInfo);
+                    listeOs.Remove(osInfo);
                     score++;
                     Score();
                 }
