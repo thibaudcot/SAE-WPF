@@ -36,6 +36,8 @@ namespace ProjetTeckel
         ImageBrush imgTeckelGauche;
         ImageBrush imgTeckelDroite;
         ImageBrush imgTeckelBas;
+        int ligneRec;
+        int colRec;
 
         public MainWindow()
         {
@@ -70,10 +72,9 @@ namespace ProjetTeckel
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
-            if(score == 3)
-            {
+            if (score == 3)
                 timer.Interval = TimeSpan.FromMilliseconds(125);
-            }
+           
             
 
         }
@@ -82,8 +83,8 @@ namespace ProjetTeckel
         {
             Score();
             //on récupère les coordonnées du snake sur la grille
-            int ligneRec = Grid.GetRow(teckel);
-            int colRec = Grid.GetColumn(teckel);
+            ligneRec = Grid.GetRow(teckel);
+            colRec = Grid.GetColumn(teckel);
 
             if(listeOs.Count == 0)
             {
