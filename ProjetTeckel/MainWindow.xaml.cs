@@ -64,16 +64,16 @@ namespace ProjetTeckel
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
-
-
-
-
             if (ChoixMenu.DialogResult == false)
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(150); //each 150 MilliSeconds the timer_Tick function will be executed
             timer.Tick += timer_Tick;
             timer.Start();
+            if(score == 3)
+            {
+                timer.Interval = TimeSpan.FromMilliseconds(125);
+            }
             
 
         }
@@ -201,6 +201,7 @@ namespace ProjetTeckel
                         Grid.SetRow(chocolat, xChocolat);
                     }
                 }
+                
             }
 
                 
