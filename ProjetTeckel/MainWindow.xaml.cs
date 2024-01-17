@@ -166,7 +166,7 @@ namespace ProjetTeckel
                     int rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
                     int columnChocolat = Grid.GetColumn(chocolatInfo.Rectangle);
 
-                    Debug.WriteLine($"Chocolat {chocolatInfo.Numero} - Row: {rowChocolat}, Column: {columnChocolat}");
+                Debug.WriteLine($"Chocolat {chocolatInfo.Numero} - Row: {rowChocolat}, Column: {columnChocolat}");
 
                     if (rowChocolat == Grid.GetRow(teckel) && columnChocolat == Grid.GetColumn(teckel))
                     {
@@ -176,7 +176,7 @@ namespace ProjetTeckel
                         Grid.Children.Remove(chocolatInfo.Rectangle);
                         listeChocolats.Remove(chocolatInfo);
                     }
-                }
+            }
             if (score == 3)
             {
                 if (listeChocolats.Count < 25)
@@ -202,6 +202,7 @@ namespace ProjetTeckel
                     }
                 }
             }
+
                 
 
 
@@ -259,13 +260,6 @@ namespace ProjetTeckel
                         GameOver();
                     }
                     break;
-            }
-            if (Grid.GetRow(teckel) == Grid.GetRow(nourriture) && Grid.GetColumn(teckel) == Grid.GetColumn(nourriture))
-            {
-                Grid.Children.Remove(nourriture);
-                score++;
-                Score();
-                AjouterPartieCorpsChien();
             }
 
             
