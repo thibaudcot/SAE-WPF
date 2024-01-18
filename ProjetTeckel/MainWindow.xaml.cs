@@ -32,7 +32,6 @@ namespace ProjetTeckel
         int nombrecorps = 0;
         int score = 0;
         int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
-        Rectangle nourriture = new Rectangle();//rectangle correspondant à la nourriture, qui sera inséré dans la grille dynamiquement
         Random randomN = new Random();
         Random randomC = new Random();
         ImageBrush imgChocolat = new ImageBrush();
@@ -161,7 +160,7 @@ namespace ProjetTeckel
                     {
                         xOs = randomN.Next(0, 17);
                         yOs = randomN.Next(0, 20);
-                    } while (listeOs.Any(c => Grid.GetRow(c.Rectangle) == xOs && Grid.GetColumn(c.Rectangle) == yOs));
+                    } while (xOs == xChocolat && yOs == yChocolat);
 
                     os.Width = teckel.Width;
                     os.Height = teckel.Height;
@@ -188,8 +187,6 @@ namespace ProjetTeckel
                 // Vérifiez s'ils se trouvent dans la même cellule de la grille
                 if (rowTeckel == rowNourriture && columnTeckel == columnNourriture)
                 {
-                   
-
                     // Supprimez le rectangle de la grille et de la liste
                     Grid.Children.Remove(osInfo.Rectangle);
                     tailleCorps ++;
@@ -215,7 +212,7 @@ namespace ProjetTeckel
                     {
                         xChocolat = randomC.Next(0, 17);
                         yChocolat = randomC.Next(0, 20);
-                    } while (xChocolat == Grid.GetRow(nourriture) && yChocolat == Grid.GetColumn(nourriture));
+                    } while (xChocolat == xOs && yChocolat == yOs);
 
                     chocolat.Width = teckel.Width;
                     chocolat.Height = teckel.Height;
@@ -384,15 +381,14 @@ namespace ProjetTeckel
 
             public void GameOver()
             {
-                ImageBrush imgTeckel = new ImageBrush();
                 imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
                 teckel.Fill = imgTeckel;
-                MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        Grid.Children.Remove(nourriture);
-                    Grid.SetColumn(teckel, 2);
+                        SupprimerTousChocolatsEtOs();
+                        Grid.SetColumn(teckel, 2);
                         Grid.SetRow(teckel, 2);
                         _direction = 0;
                         score = 0;
@@ -412,18 +408,24 @@ namespace ProjetTeckel
                     case MessageBoxResult.No:
                         Close();
                         break;
-                    case MessageBoxResult.Cancel:
-                        MessageBox.Show("Nevermind then...", "Teckel");
-                        break;
                 }
 
             }
             private void Score()
             {
                 this.Scoretxt.Text = "Score : " + score;
-            if (score > MeilleureScore)
+            if (score > MeilleurScore)
             {
-                MeilleureScore = score;
+                MeilleurScore = score;
+            }
+                this.MScoretxt.Text = "Meilleur Score : " + MeilleurScore;
+            }
+        private void SupprimerTousChocolatsEtOs()
+        {
+            // Parcourez tous les enfants de la Grid sauf le teckel et retirez les chocolats et les os
+            foreach (UIElement element in Grid.Children.OfType<Rectangle>().Where(e => e != teckel).ToList())
+            {
+                Grid.Children.Remove(element);
             }
 
             
