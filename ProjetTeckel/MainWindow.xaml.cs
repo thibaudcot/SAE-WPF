@@ -28,6 +28,7 @@ namespace ProjetTeckel
         List<OsInfo> listeOs = new List<OsInfo>();
         List<Point> corpsTeckel = new List<Point>();//liste point corps
         List<Rectangle> trucASupprimer = new List<Rectangle>();
+        List<Rectangle> rectTeckel = new List<Rectangle>();
         int nombrecorps = 0;
         int score = 0;
         int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
@@ -51,6 +52,9 @@ namespace ProjetTeckel
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
         int MeilleureScore;
+        int tailleCorps = 0;
+
+
 
         public MainWindow()
         {
@@ -82,7 +86,7 @@ namespace ProjetTeckel
             if (ChoixMenu.DialogResult == false)
                 Application.Current.Shutdown();
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(vitesse); //each 150 MilliSeconds the timer_Tick function will be executed
+            timer.Interval = TimeSpan.FromMilliseconds(vitesse); 
             timer.Tick += timer_Tick;
             timer.Start();
             
@@ -97,26 +101,27 @@ namespace ProjetTeckel
             //on récupère les coordonnées du snake sur la grille
             ligneRec = Grid.GetRow(teckel);
             colRec = Grid.GetColumn(teckel);
-            Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
+            //Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
             corpsTeckel.Insert(0, new Point(colRec, ligneRec));
 
             // Dessine les parties du corps du chien
-            //foreach (var point in corpsTeckel)
-            for (int i = 0;i<corpsTeckel.Count;i++)
+             /*foreach (var point in corpsTeckel)
+             for (int i = 0;i<corpsTeckel.Count;i++)
             {
-                Rectangle corpsPart = new Rectangle();
-                corpsPart.Width = teckel.Width;
-                corpsPart.Height = teckel.Height;
-                ImageBrush imgCorps = new ImageBrush();
-                imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png")); // Remplacez par le chemin de votre image de corps
-                corpsPart.Fill = imgCorps;
-
-                Grid.Children.Add(corpsPart);
-                Grid.SetColumn(corpsPart, (int)corpsTeckel[i].Y);
-                Grid.SetRow(corpsPart, (int)corpsTeckel[i].X);                                     
-            }
+               Rectangle corpsPart = new Rectangle();
+               corpsPart.Width = teckel.Width;
+               corpsPart.Height = teckel.Height;
+               ImageBrush imgCorps = new ImageBrush();
+               imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png")); 
+               corpsPart.Fill = imgCorps;
+               rectTeckel.Add(corpsPart);
+               Grid.Children.Add(corpsPart);
+               Grid.SetColumn(corpsPart, Grid.GetColumn(teckel));
+                Grid.SetRow(corpsPart, Grid.GetRow(teckel));                                     
+           }*/
             
-            deplacement_corps();
+            
+           
             if (scoreacheck == 3)
             {
                 vitesse += 25;
@@ -125,7 +130,7 @@ namespace ProjetTeckel
                 {
                     for (int i = 0; i <= 5; i++)
                     {
-                        Rectangle chocolat = new Rectangle();
+                       Rectangle chocolat = new Rectangle();
                         do
                         {
                             xChocolat = randomN.Next(0, 17);
@@ -146,7 +151,7 @@ namespace ProjetTeckel
                         Grid.SetRow(chocolat, xChocolat);
                     }
                 }
-            }
+           }
             if(listeOs.Count == 0)
             {
                 for (int i = 0; i <= 2; i++)
@@ -187,6 +192,7 @@ namespace ProjetTeckel
 
                     // Supprimez le rectangle de la grille et de la liste
                     Grid.Children.Remove(osInfo.Rectangle);
+                    tailleCorps ++;
                     listeOs.Remove(osInfo);
                     score++;
                     scoreacheck++;
@@ -256,6 +262,8 @@ namespace ProjetTeckel
                         ligneRec = ligneRec - 1;
                         Grid.SetRow(teckel, ligneRec);
                         teckel.Fill = imgTeckelHaut;
+                        deplacement_corps();
+                        Corps();
                     }
                     else
                     {
@@ -269,6 +277,8 @@ namespace ProjetTeckel
                         colRec = colRec - 1;
                         Grid.SetColumn(teckel, colRec);
                         teckel.Fill = imgTeckelGauche;
+                        deplacement_corps();
+                        Corps();
                     }
                     else
                     {
@@ -282,6 +292,8 @@ namespace ProjetTeckel
                         colRec = colRec + 1;
                         Grid.SetColumn(teckel, colRec);
                         teckel.Fill = imgTeckelDroite;
+                        deplacement_corps();
+                        Corps();
                     }
                     else
                     {
@@ -295,6 +307,8 @@ namespace ProjetTeckel
                         ligneRec = ligneRec + 1;
                         Grid.SetRow(teckel, ligneRec);
                         teckel.Fill = imgTeckelBas;
+                        deplacement_corps();
+                        Corps();
                     }
                     else
                     {
@@ -311,23 +325,38 @@ namespace ProjetTeckel
 
         }
     
-            private void deplacement_corps()
-        {
-            foreach(Rectangle corps in Grid.Children.OfType<Rectangle>())
+           private void deplacement_corps()
+           {
+            /*foreach(Rectangle corps in Grid.Children.OfType<Rectangle>())
             {
-            if (Grid.GetColumn(corps) == corpsTeckel[nombrecorps].X && Grid.GetRow(corps) == corpsTeckel[nombrecorps].Y) 
-                {
-                    trucASupprimer.Add(corps);  //regarde tout les rectangle de la grille et si rectangle dernier corps on le supprime 
-                }
+                 if (Grid.GetColumn(corps) == corpsTeckel[0].X && Grid.GetRow(corps) == corpsTeckel[0].Y && corps != teckel) 
+                 {
+                     trucASupprimer.Add(corps);  //regarde tout les rectangle de la grille et si rectangle dernier corps on le supprime 
+                 }
             }
+
+
             foreach(Rectangle x in trucASupprimer)
             {
-                Grid.Children.Remove(x);
+               Console.WriteLine("supprimé" + trucASupprimer.Count);
+               Grid.Children.Remove(x);
+
+             }*/
+            Console.WriteLine(rectTeckel.Count);
+            if (rectTeckel.Count > tailleCorps)
+            {
+                Grid.Children.Remove(rectTeckel[0]);
+                rectTeckel.RemoveAt(0);
             }
+
+
+            trucASupprimer.Clear();
+
+
             for (int i = 1; i < corpsTeckel.Count; i++)
             {
-                corpsTeckel[i] = corpsTeckel[i-1]; //prend la place de l'element placé avant 
-                
+                corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
+
             }
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
@@ -368,6 +397,9 @@ namespace ProjetTeckel
                         _direction = 0;
                         score = 0;
                         scoreacheck = 0;
+                        nombrecorps = 0;
+                        corpsTeckel.Clear();
+                        trucASupprimer.Clear();
                         imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
                         teckel.Fill = imgTeckel;
                         Menu ChoixMenu = new Menu();
@@ -393,9 +425,24 @@ namespace ProjetTeckel
             {
                 MeilleureScore = score;
             }
+
+            
+        }
+        void Corps()
+        {
+            Rectangle corpsPart = new Rectangle();
+            corpsPart.Width = teckel.Width;
+            corpsPart.Height = teckel.Height;
+            ImageBrush imgCorps = new ImageBrush();
+            imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png"));
+            corpsPart.Fill = imgCorps;
+            rectTeckel.Add(corpsPart);
+            Grid.Children.Add(corpsPart);
+            Grid.SetColumn(corpsPart, Grid.GetColumn(teckel));
+            Grid.SetRow(corpsPart, Grid.GetRow(teckel));
         }
 
-        
+
     }
 }
 
