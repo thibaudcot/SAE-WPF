@@ -135,7 +135,7 @@ namespace ProjetTeckel
                     {
                         xOs = randomN.Next(0, 17);
                         yOs = randomN.Next(0, 20);
-                    } while (listeOs.Any(c => Grid.GetRow(c.Rectangle) == xOs && Grid.GetColumn(c.Rectangle) == yOs));
+                    } while (xOs == xChocolat && yOs == yChocolat);
 
                     os.Width = teckel.Width;
                     os.Height = teckel.Height;
