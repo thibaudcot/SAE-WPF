@@ -181,9 +181,6 @@ namespace ProjetTeckel
                     Score();
                     nombrecorps++;
                     corpsTeckel[nombrecorps] = new Point(corpsTeckel[nombrecorps - 1].X, corpsTeckel[nombrecorps - 1].Y); //rajouter un corps de teckel des qu'un os est mangé 
-
-
-
                 }
             }
 
