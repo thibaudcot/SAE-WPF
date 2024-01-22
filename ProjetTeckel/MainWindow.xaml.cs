@@ -378,8 +378,8 @@ namespace ProjetTeckel
                         score = 0;
                         scoreacheck = 0;
                         nombrecorps = 0;
-                        /*corpsTeckel.Clear();
-                        trucASupprimer.Clear();*/
+                        corpsTeckel.Clear();
+                        trucASupprimer.Clear();
                         imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
                         teckel.Fill = imgTeckelHaut;
                         Menu ChoixMenu = new Menu();
