@@ -26,12 +26,12 @@ namespace ProjetTeckel
     {
         List<ChocolatInfo> listeChocolats = new List<ChocolatInfo>();
         List<OsInfo> listeOs = new List<OsInfo>();
-        List<Point> corpsTeckel = new List<Point>();//liste point corps
+        List<Point> corpsTeckel = new List<Point>();
         List<Rectangle> trucASupprimer = new List<Rectangle>();
         List<Rectangle> rectTeckel = new List<Rectangle>();
         int nombrecorps = 0;
         int score = 0;
-        int direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
+        int direction = 0; 
         Random randomN = new Random();
         Random randomC = new Random();
         ImageBrush imgChocolat = new ImageBrush();
@@ -99,10 +99,10 @@ namespace ProjetTeckel
         void timer_Tick(object sender, EventArgs e)
         {
             Score();
-            //on récupère les coordonnées du snake sur la grille
+
             ligneRec = Grid.GetRow(teckel);
             colRec = Grid.GetColumn(teckel);
-            //Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
+
             corpsTeckel.Insert(0, new Point(colRec, ligneRec));
             
             
@@ -164,16 +164,16 @@ namespace ProjetTeckel
             }
             foreach (OsInfo osInfo in listeOs.ToList())
             {
-                // Obtenez les coordonnées du chocolat dans la grille
+
                 rowNourriture = Grid.GetRow(osInfo.Rectangle);
                 columnNourriture = Grid.GetColumn(osInfo.Rectangle);
                 rowTeckel = Grid.GetRow(teckel);
                 columnTeckel = Grid.GetColumn(teckel);
 
-                // Vérifiez s'ils se trouvent dans la même cellule de la grille
+             
                 if (rowTeckel == rowNourriture && columnTeckel == columnNourriture)
                 {
-                    // Supprimez le rectangle de la grille et de la liste
+      
                     Grid.Children.Remove(osInfo.Rectangle);
                     tailleCorps ++;
                     listeOs.Remove(osInfo);
@@ -190,7 +190,7 @@ namespace ProjetTeckel
                 for (int i = 0; i <= 15; i++)
                 {
                     Rectangle chocolat = new Rectangle();
-                    // Générer des coordonnées aléatoires pour le chocolat en évitant l'emplacement de l'os
+
                     do
                     {
                         xChocolat = randomC.Next(0, 17);
@@ -328,7 +328,7 @@ namespace ProjetTeckel
 
             for (int i = 1; i < corpsTeckel.Count; i++)
             {
-                corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
+                corpsTeckel[i] = corpsTeckel[i - 1]; 
 
             }
 
@@ -381,11 +381,10 @@ namespace ProjetTeckel
         {
             SupprimerTousChocolatsEtOs();
 
-            // Remettre la tête du teckel à sa position initiale
+
             Grid.SetColumn(teckel, 2);
             Grid.SetRow(teckel, 2);
 
-            // Réinitialiser les variables d'état du jeu
             direction = 0;
             score = 0;
             scoreacheck = 0;
@@ -396,11 +395,11 @@ namespace ProjetTeckel
             listeChocolats.Clear();
             listeOs.Clear();
 
-            // Remettre l'image de la tête du teckel à sa version normale
+       
             imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
             teckel.Fill = imgTeckelHaut;
 
-            // Afficher à nouveau le menu
+ 
             Menu ChoixMenu = new Menu();
             ChoixMenu.ShowDialog();
 
