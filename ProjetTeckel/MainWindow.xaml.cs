@@ -224,28 +224,38 @@ namespace ProjetTeckel
                 
             }
 
-                foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
-                {
-                    rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
-                    columnChocolat = Grid.GetColumn(chocolatInfo.Rectangle);
+            foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
+            {
+                rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
+                columnChocolat = Grid.GetColumn(chocolatInfo.Rectangle);
 
-                    if (rowChocolat == Grid.GetRow(teckel) && columnChocolat == Grid.GetColumn(teckel))
+                if (rowChocolat == Grid.GetRow(teckel) && columnChocolat == Grid.GetColumn(teckel))
+                {
+                    score--;
+                    scoreacheck--;
+                    Score();
+                    nombrecorps--;
+
+                    // Retirez un corps s'il y en a plus d'un
+                    if (corpsTeckel.Count > 0)
                     {
-                        score--;
-                        scoreacheck--;
-                        Score();
-                        nombrecorps--;
-                    
-                    
-                    if (tailleCorps > 1)
-                    {
-                        tailleCorps--;
+                        Point lastCorpsPosition = corpsTeckel.Last();
+                        Rectangle lastCorpsRectangle = rectTeckel.Last();
+
+                        Grid.Children.Remove(lastCorpsRectangle);
+                        rectTeckel.RemoveAt(rectTeckel.Count - 1);
+                        corpsTeckel.RemoveAt(corpsTeckel.Count - 1);
                     }
 
                     Grid.Children.Remove(chocolatInfo.Rectangle);
-                        listeChocolats.Remove(chocolatInfo);
-                    }
+                    listeChocolats.Remove(chocolatInfo);
+                }
             }
+
+
+
+
+
 
 
 
