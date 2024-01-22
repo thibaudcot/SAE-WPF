@@ -50,7 +50,7 @@ namespace ProjetTeckel
         int rowNourriture, columnNourriture;
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
-        int MeilleurScore;
+        int meilleureScore;
         int tailleCorps = 0;
         int rowCorps, columnCorps;
 
@@ -309,21 +309,6 @@ namespace ProjetTeckel
     
            private void deplacement_corps()
            {
-            /*foreach(Rectangle corps in Grid.Children.OfType<Rectangle>())
-            {
-                 if (Grid.GetColumn(corps) == corpsTeckel[0].X && Grid.GetRow(corps) == corpsTeckel[0].Y && corps != teckel) 
-                 {
-                     trucASupprimer.Add(corps);  //regarde tout les rectangle de la grille et si rectangle dernier corps on le supprime 
-                 }
-            }
-
-
-            foreach(Rectangle x in trucASupprimer)
-            {
-               Console.WriteLine("supprimé" + trucASupprimer.Count);
-               Grid.Children.Remove(x);
-
-             }*/
             Console.WriteLine(rectTeckel.Count);
             if (rectTeckel.Count > tailleCorps)
             {
@@ -416,11 +401,11 @@ namespace ProjetTeckel
             private void Score()
             {
                 this.Scoretxt.Text = "Score : " + score;
-            if (score > MeilleurScore)
+            if (score > meilleurScore)
             {
-                MeilleurScore = score;
+                meilleurScore = score;
             }
-                this.MScoretxt.Text = "Meilleur Score : " + MeilleurScore;
+                this.MScoretxt.Text = "Meilleur Score : " + meilleurScore;
             }
         private void SupprimerTousChocolatsEtOs()
         {
