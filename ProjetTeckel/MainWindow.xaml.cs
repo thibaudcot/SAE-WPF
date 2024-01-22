@@ -52,6 +52,7 @@ namespace ProjetTeckel
         int rowChocolat, columnChocolat;
         int meilleurScore;
         int tailleCorps = 0;
+        int rowCorps, columnCorps;
 
 
 
@@ -180,9 +181,6 @@ namespace ProjetTeckel
                     Score();
                     nombrecorps++;
                     corpsTeckel[nombrecorps] = new Point(corpsTeckel[nombrecorps - 1].X, corpsTeckel[nombrecorps - 1].Y); //rajouter un corps de teckel des qu'un os est mangé 
-
-
-
                 }
             }
 
@@ -332,6 +330,23 @@ namespace ProjetTeckel
                 corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
 
             }
+            /*foreach (Rectangle corps in Grid.Children.OfType<Rectangle>())
+            {
+                rowTeckel = Grid.GetRow(teckel);
+                columnTeckel = Grid.GetColumn(teckel);
+
+                rowCorps = Grid.GetRow(corps);
+                columnCorps = Grid.GetColumn(corps);
+
+                // Vérifiez s'ils se trouvent dans la même cellule de la grille que le teckel
+                if (rowCorps == rowTeckel && columnCorps == columnTeckel)
+                {
+                    // Si le teckel touche son propre corps, c'est la fin du jeu
+                    GameOver();
+                    return;
+                }
+            }*/
+
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
             {
@@ -358,39 +373,54 @@ namespace ProjetTeckel
 
             public void GameOver()
             {
-                imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
-                teckel.Fill = imgTeckelHaut;
-                MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        SupprimerTousChocolatsEtOs();
-                        Grid.SetColumn(teckel, 2);
-                        Grid.SetRow(teckel, 2);
-                        _direction = 0;
-                        score = 0;
-                        scoreacheck = 0;
-                        nombrecorps = 0;
-                        corpsTeckel.Clear();
-                        trucASupprimer.Clear();
-                        tailleCorps = 0;
-                        rectTeckel.Clear();
-                    imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
-                        teckel.Fill = imgTeckelHaut;
-                        Menu ChoixMenu = new Menu();
-                        ChoixMenu.ShowDialog();
+            imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
+            teckel.Fill = imgTeckelHaut;
 
+            MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
 
-                        if (ChoixMenu.DialogResult == false)
-                            Application.Current.Shutdown();
-                        break;
-                    case MessageBoxResult.No:
-                        Close();
-                        break;
-                }
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    ReinitialiserJeu();
+                    break;
 
+                case MessageBoxResult.No:
+                    Close();
+                    break;
             }
-            private void Score()
+
+        }
+        private void ReinitialiserJeu()
+        {
+            SupprimerTousChocolatsEtOs();
+
+            // Remettre la tête du teckel à sa position initiale
+            Grid.SetColumn(teckel, 2);
+            Grid.SetRow(teckel, 2);
+
+            // Réinitialiser les variables d'état du jeu
+            _direction = 0;
+            score = 0;
+            scoreacheck = 0;
+            nombrecorps = 0;
+            tailleCorps = 0;
+            corpsTeckel.Clear();
+            rectTeckel.Clear();
+            listeChocolats.Clear();
+            listeOs.Clear();
+
+            // Remettre l'image de la tête du teckel à sa version normale
+            imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+            teckel.Fill = imgTeckelHaut;
+
+            // Afficher à nouveau le menu
+            Menu ChoixMenu = new Menu();
+            ChoixMenu.ShowDialog();
+
+            if (ChoixMenu.DialogResult == false)
+                Application.Current.Shutdown();
+        }
+        private void Score()
             {
                 this.Scoretxt.Text = "Score : " + score;
             if (score > meilleurScore)
@@ -401,13 +431,12 @@ namespace ProjetTeckel
             }
         private void SupprimerTousChocolatsEtOs()
         {
-            // Parcourez tous les enfants de la Grid sauf le teckel et retirez les chocolats et les os
             foreach (UIElement element in Grid.Children.OfType<Rectangle>().Where(e => e != teckel).ToList())
             {
                 Grid.Children.Remove(element);
             }
 
-            
+
         }
         private void Corps()
         {
