@@ -100,27 +100,9 @@ namespace ProjetTeckel
             //on récupère les coordonnées du snake sur la grille
             ligneRec = Grid.GetRow(teckel);
             colRec = Grid.GetColumn(teckel);
-            //Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
-            corpsTeckel.Insert(0, new Point(colRec, ligneRec));
 
-            // Dessine les parties du corps du chien
-             /*foreach (var point in corpsTeckel)
-             for (int i = 0;i<corpsTeckel.Count;i++)
-            {
-               Rectangle corpsPart = new Rectangle();
-               corpsPart.Width = teckel.Width;
-               corpsPart.Height = teckel.Height;
-               ImageBrush imgCorps = new ImageBrush();
-               imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png")); 
-               corpsPart.Fill = imgCorps;
-               rectTeckel.Add(corpsPart);
-               Grid.Children.Add(corpsPart);
-               Grid.SetColumn(corpsPart, Grid.GetColumn(teckel));
-                Grid.SetRow(corpsPart, Grid.GetRow(teckel));                                     
-           }*/
-            
-            
-           
+            corpsTeckel.Insert(0, new Point(colRec, ligneRec));
+                   
             if (scoreacheck == 3)
             {
                 vitesse += 25;
@@ -324,21 +306,6 @@ namespace ProjetTeckel
     
            private void deplacement_corps()
            {
-            /*foreach(Rectangle corps in Grid.Children.OfType<Rectangle>())
-            {
-                 if (Grid.GetColumn(corps) == corpsTeckel[0].X && Grid.GetRow(corps) == corpsTeckel[0].Y && corps != teckel) 
-                 {
-                     trucASupprimer.Add(corps);  //regarde tout les rectangle de la grille et si rectangle dernier corps on le supprime 
-                 }
-            }
-
-
-            foreach(Rectangle x in trucASupprimer)
-            {
-               Console.WriteLine("supprimé" + trucASupprimer.Count);
-               Grid.Children.Remove(x);
-
-             }*/
             Console.WriteLine(rectTeckel.Count);
             if (rectTeckel.Count > tailleCorps)
             {
