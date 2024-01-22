@@ -11,7 +11,7 @@
     Height="490"
     KeyDown="PrjTeckel_KeyDown"
     mc:Ignorable="d" ResizeMode="NoResize">
-    <Grid x:Name="Grid">
+    <Grid x:Name="Grid" FlowDirection="RightToLeft">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="25" />

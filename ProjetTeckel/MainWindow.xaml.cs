@@ -113,7 +113,9 @@ namespace ProjetTeckel
 
             ligneRec = Grid.GetRow(teckel);
             colRec = Grid.GetColumn(teckel);
-
+            #if DEBUG
+            Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
+            #endif
             corpsTeckel.Insert(0, new Point(colRec, ligneRec));
             
             
