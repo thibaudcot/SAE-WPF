@@ -365,37 +365,54 @@ namespace ProjetTeckel
 
             public void GameOver()
             {
-                imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
-                teckel.Fill = imgTeckelHaut;
-                MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        SupprimerTousChocolatsEtOs();
-                        Grid.SetColumn(teckel, 2);
-                        Grid.SetRow(teckel, 2);
-                        _direction = 0;
-                        score = 0;
-                        scoreacheck = 0;
-                        nombrecorps = 0;
-                        corpsTeckel.Clear();
-                        trucASupprimer.Clear();
-                        imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
-                        teckel.Fill = imgTeckelHaut;
-                        Menu ChoixMenu = new Menu();
-                        ChoixMenu.ShowDialog();
+            imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
+            teckel.Fill = imgTeckelHaut;
 
+            MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
 
-                        if (ChoixMenu.DialogResult == false)
-                            Application.Current.Shutdown();
-                        break;
-                    case MessageBoxResult.No:
-                        Close();
-                        break;
-                }
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    ReinitialiserJeu();
+                    break;
 
+                case MessageBoxResult.No:
+                    Close();
+                    break;
             }
-            private void Score()
+
+        }
+        private void ReinitialiserJeu()
+        {
+            SupprimerTousChocolatsEtOs();
+
+            // Remettre la tête du teckel à sa position initiale
+            Grid.SetColumn(teckel, 2);
+            Grid.SetRow(teckel, 2);
+
+            // Réinitialiser les variables d'état du jeu
+            _direction = 0;
+            score = 0;
+            scoreacheck = 0;
+            nombrecorps = 0;
+            tailleCorps = 0;
+            corpsTeckel.Clear();
+            rectTeckel.Clear();
+            listeChocolats.Clear();
+            listeOs.Clear();
+
+            // Remettre l'image de la tête du teckel à sa version normale
+            imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+            teckel.Fill = imgTeckelHaut;
+
+            // Afficher à nouveau le menu
+            Menu ChoixMenu = new Menu();
+            ChoixMenu.ShowDialog();
+
+            if (ChoixMenu.DialogResult == false)
+                Application.Current.Shutdown();
+        }
+        private void Score()
             {
                 this.Scoretxt.Text = "Score : " + score;
             if (score > meilleurScore)
@@ -411,7 +428,7 @@ namespace ProjetTeckel
                 Grid.Children.Remove(element);
             }
 
-            
+
         }
         void Corps()
         {
