@@ -322,7 +322,7 @@ namespace ProjetTeckel
                 corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
 
             }
-            foreach (Rectangle corps in Grid.Children.OfType<Rectangle>())
+            /*foreach (Rectangle corps in Grid.Children.OfType<Rectangle>())
             {
                 rowTeckel = Grid.GetRow(teckel);
                 columnTeckel = Grid.GetColumn(teckel);
@@ -337,7 +337,7 @@ namespace ProjetTeckel
                     GameOver();
                     return;
                 }
-            }
+            }*/
 
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
@@ -378,8 +378,8 @@ namespace ProjetTeckel
                         score = 0;
                         scoreacheck = 0;
                         nombrecorps = 0;
-                        corpsTeckel.Clear();
-                        trucASupprimer.Clear();
+                        /*corpsTeckel.Clear();
+                        trucASupprimer.Clear();*/
                         imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
                         teckel.Fill = imgTeckelHaut;
                         Menu ChoixMenu = new Menu();
