@@ -29,8 +29,6 @@ namespace ProjetTeckel
         List<Point> corpsTeckel = new List<Point>();//liste point corps
         List<Rectangle> trucASupprimer = new List<Rectangle>();
         List<Rectangle> rectTeckel = new List<Rectangle>();
-        List<Rectangle> rectCorpsTeckel = new List<Rectangle>();
-
         int nombrecorps = 0;
         int score = 0;
         int direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
@@ -55,8 +53,6 @@ namespace ProjetTeckel
         int meilleurScore;
         int tailleCorps = 0;
         int rowCorps, columnCorps;
-        bool teckelAMangeDuChocolat = false;
-
 
 
 
@@ -216,8 +212,6 @@ namespace ProjetTeckel
                 
             }
 
-            // Logique de gestion des chocolats
-            // Logique de gestion des chocolats
             foreach (ChocolatInfo chocolatInfo in listeChocolats.ToList())
             {
                 rowChocolat = Grid.GetRow(chocolatInfo.Rectangle);
@@ -225,26 +219,26 @@ namespace ProjetTeckel
 
                 if (rowChocolat == Grid.GetRow(teckel) && columnChocolat == Grid.GetColumn(teckel))
                 {
-                    // Supprimez le rectangle de la grille et de la liste
-                    Grid.Children.Remove(chocolatInfo.Rectangle);
-                    listeChocolats.Remove(chocolatInfo);
                     score--;
                     scoreacheck--;
                     Score();
                     nombrecorps--;
 
-                    // Gestion du corps du teckel
-                    if (rectCorpsTeckel.Count > 0)
+                    // Retirez un corps s'il y en a plus d'un
+                    if (corpsTeckel.Count > 0)
                     {
-                        Grid.Children.Remove(rectCorpsTeckel[rectCorpsTeckel.Count - 1]);
-                        rectCorpsTeckel.RemoveAt(rectCorpsTeckel.Count - 1);
-                        tailleCorps--;
+                        Point lastCorpsPosition = corpsTeckel.Last();
+                        Rectangle lastCorpsRectangle = rectTeckel.Last();
+
+                        Grid.Children.Remove(lastCorpsRectangle);
+                        rectTeckel.RemoveAt(rectTeckel.Count - 1);
+                        corpsTeckel.RemoveAt(corpsTeckel.Count - 1);
                     }
+
+                    Grid.Children.Remove(chocolatInfo.Rectangle);
+                    listeChocolats.Remove(chocolatInfo);
                 }
             }
-
-
-
 
 
 
@@ -448,12 +442,11 @@ namespace ProjetTeckel
             ImageBrush imgCorps = new ImageBrush();
             imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png"));
             corpsPart.Fill = imgCorps;
-            rectCorpsTeckel.Add(corpsPart);
+            rectTeckel.Add(corpsPart);
             Grid.Children.Add(corpsPart);
             Grid.SetColumn(corpsPart, Grid.GetColumn(teckel));
             Grid.SetRow(corpsPart, Grid.GetRow(teckel));
         }
-
 
 
     }
