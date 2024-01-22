@@ -52,6 +52,7 @@ namespace ProjetTeckel
         int rowChocolat, columnChocolat;
         int MeilleurScore;
         int tailleCorps = 0;
+        int rowCorps, columnCorps;
 
 
 
@@ -339,6 +340,23 @@ namespace ProjetTeckel
                 corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
 
             }
+            foreach (Rectangle corps in Grid.Children.OfType<Rectangle>())
+            {
+                rowTeckel = Grid.GetRow(teckel);
+                columnTeckel = Grid.GetColumn(teckel);
+
+                rowCorps = Grid.GetRow(corps);
+                columnCorps = Grid.GetColumn(corps);
+
+                // Vérifiez s'ils se trouvent dans la même cellule de la grille que le teckel
+                if (rowCorps == rowTeckel && columnCorps == columnTeckel)
+                {
+                    // Si le teckel touche son propre corps, c'est la fin du jeu
+                    GameOver();
+                    return;
+                }
+            }
+
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
             {
@@ -406,7 +424,6 @@ namespace ProjetTeckel
             }
         private void SupprimerTousChocolatsEtOs()
         {
-            // Parcourez tous les enfants de la Grid sauf le teckel et retirez les chocolats et les os
             foreach (UIElement element in Grid.Children.OfType<Rectangle>().Where(e => e != teckel).ToList())
             {
                 Grid.Children.Remove(element);
