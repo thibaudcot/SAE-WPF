@@ -50,7 +50,7 @@ namespace ProjetTeckel
         int rowNourriture, columnNourriture;
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
-        int meilleureScore;
+        int meilleurScore;
         int tailleCorps = 0;
         int rowCorps, columnCorps;
 
