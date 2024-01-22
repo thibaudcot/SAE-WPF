@@ -102,22 +102,6 @@ namespace ProjetTeckel
             colRec = Grid.GetColumn(teckel);
             //Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
             corpsTeckel.Insert(0, new Point(colRec, ligneRec));
-
-            // Dessine les parties du corps du chien
-             /*foreach (var point in corpsTeckel)
-             for (int i = 0;i<corpsTeckel.Count;i++)
-            {
-               Rectangle corpsPart = new Rectangle();
-               corpsPart.Width = teckel.Width;
-               corpsPart.Height = teckel.Height;
-               ImageBrush imgCorps = new ImageBrush();
-               imgCorps.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\corps.png")); 
-               corpsPart.Fill = imgCorps;
-               rectTeckel.Add(corpsPart);
-               Grid.Children.Add(corpsPart);
-               Grid.SetColumn(corpsPart, Grid.GetColumn(teckel));
-                Grid.SetRow(corpsPart, Grid.GetRow(teckel));                                     
-           }*/
             
             
            
