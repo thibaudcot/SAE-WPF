@@ -101,7 +101,6 @@ namespace ProjetTeckel
             //on récupère les coordonnées du snake sur la grille
             ligneRec = Grid.GetRow(teckel);
             colRec = Grid.GetColumn(teckel);
-            //Console.WriteLine("row : " + ligneRec + "\nligne : " + colRec);
             corpsTeckel.Insert(0, new Point(colRec, ligneRec));
             
             
