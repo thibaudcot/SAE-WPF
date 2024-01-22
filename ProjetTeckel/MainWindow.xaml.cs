@@ -31,7 +31,7 @@ namespace ProjetTeckel
         List<Rectangle> rectTeckel = new List<Rectangle>();
         int nombrecorps = 0;
         int score = 0;
-        int _direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
+        int direction = 0; //variable qui permettra de savoir la derniere direction choisi par l'utilisateur
         Random randomN = new Random();
         Random randomC = new Random();
         ImageBrush imgChocolat = new ImageBrush();
@@ -44,7 +44,7 @@ namespace ProjetTeckel
         int colRec;
         int scoreacheck;
         int vitesse = 150;
-        int AugObjet = 5;
+        int augObjet = 5;
         int xOs, yOs;
         int xChocolat, yChocolat;
         int rowNourriture, columnNourriture;
@@ -53,6 +53,7 @@ namespace ProjetTeckel
         int meilleurScore;
         int tailleCorps = 0;
         int rowCorps, columnCorps;
+
 
 
 
@@ -110,7 +111,7 @@ namespace ProjetTeckel
             {
                 vitesse += 25;
                 scoreacheck = 0;
-                if (listeChocolats.Count > AugObjet)
+                if (listeChocolats.Count > augObjet)
                 {
                     for (int i = 0; i <= 5; i++)
                     {
@@ -145,7 +146,7 @@ namespace ProjetTeckel
                     {
                         xOs = randomN.Next(0, 17);
                         yOs = randomN.Next(0, 20);
-                    } while (xOs == xChocolat && yOs == yChocolat);
+                    } while ((xOs == xChocolat && yOs == yChocolat) || (xOs == xChocolat && yOs == yChocolat));
 
                     os.Width = teckel.Width;
                     os.Height = teckel.Height;
@@ -194,7 +195,7 @@ namespace ProjetTeckel
                     {
                         xChocolat = randomC.Next(0, 17);
                         yChocolat = randomC.Next(0, 20);
-                    } while (xChocolat == xOs && yChocolat == yOs);
+                    } while ((xChocolat == ligneRec && yChocolat == colRec) || (xChocolat == xOs && yChocolat == yOs));
 
                     chocolat.Width = teckel.Width;
                     chocolat.Height = teckel.Height;
@@ -239,7 +240,7 @@ namespace ProjetTeckel
 
 
 
-            switch (_direction)
+            switch (direction)
             {
 
                 case 1: // Haut
@@ -330,46 +331,32 @@ namespace ProjetTeckel
                 corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
 
             }
-            /*foreach (Rectangle corps in Grid.Children.OfType<Rectangle>())
-            {
-                rowTeckel = Grid.GetRow(teckel);
-                columnTeckel = Grid.GetColumn(teckel);
-
-                rowCorps = Grid.GetRow(corps);
-                columnCorps = Grid.GetColumn(corps);
-
-                // Vérifiez s'ils se trouvent dans la même cellule de la grille que le teckel
-                if (rowCorps == rowTeckel && columnCorps == columnTeckel)
-                {
-                    // Si le teckel touche son propre corps, c'est la fin du jeu
-                    GameOver();
-                    return;
-                }
-            }*/
 
         }
             private void PrjTeckel_KeyDown(object sender, KeyEventArgs e)
             {
 
-                switch (e.Key.ToString())
+
+            switch (e.Key.ToString())
                 {
                     case "Up":
-                        _direction = 1;
+                    direction = 1;
                         break;
 
                     case "Down":
-                        _direction = 4;
+                    direction = 4;
                         break;
 
                     case "Right":
-                        _direction = 3;
+                    direction = 3;
                         break;
                     case "Left":
-                        _direction = 2;
+                    direction = 2;
                         break;
 
                 }
-            }
+
+        }
 
             public void GameOver()
             {
@@ -399,7 +386,7 @@ namespace ProjetTeckel
             Grid.SetRow(teckel, 2);
 
             // Réinitialiser les variables d'état du jeu
-            _direction = 0;
+            direction = 0;
             score = 0;
             scoreacheck = 0;
             nombrecorps = 0;
