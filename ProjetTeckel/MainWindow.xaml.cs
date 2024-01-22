@@ -50,7 +50,7 @@ namespace ProjetTeckel
         int rowNourriture, columnNourriture;
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
-        int MeilleureScore;
+        int MeilleurScore;
         int tailleCorps = 0;
 
 
@@ -381,8 +381,8 @@ namespace ProjetTeckel
 
             public void GameOver()
             {
-                imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
-                teckel.Fill = imgTeckel;
+                imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tetemort.png"));
+                teckel.Fill = imgTeckelHaut;
                 MessageBoxResult result = MessageBox.Show("Peux Mieux Faire xD" + "\n" + "Ton score : " + score + "\n" + "Tu veux recommencer ?", "Teckel", MessageBoxButton.YesNo);
                 switch (result)
                 {
@@ -396,8 +396,8 @@ namespace ProjetTeckel
                         nombrecorps = 0;
                         corpsTeckel.Clear();
                         trucASupprimer.Clear();
-                        imgTeckel.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
-                        teckel.Fill = imgTeckel;
+                        imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+                        teckel.Fill = imgTeckelHaut;
                         Menu ChoixMenu = new Menu();
                         ChoixMenu.ShowDialog();
 
