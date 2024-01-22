@@ -50,7 +50,7 @@ namespace ProjetTeckel
         int rowNourriture, columnNourriture;
         int rowTeckel, columnTeckel;
         int rowChocolat, columnChocolat;
-        int meilleureScore;
+        int meilleurScore;
         int tailleCorps = 0;
 
 
@@ -225,13 +225,20 @@ namespace ProjetTeckel
                         scoreacheck--;
                         Score();
                         nombrecorps--;
-                        Grid.Children.Remove(chocolatInfo.Rectangle);
+                    
+                    
+                    if (tailleCorps > 1)
+                    {
+                        tailleCorps--;
+                    }
+
+                    Grid.Children.Remove(chocolatInfo.Rectangle);
                         listeChocolats.Remove(chocolatInfo);
                     }
             }
-            
 
-                
+
+
 
 
             switch (_direction)
@@ -319,6 +326,7 @@ namespace ProjetTeckel
             trucASupprimer.Clear();
 
 
+
             for (int i = 1; i < corpsTeckel.Count; i++)
             {
                 corpsTeckel[i] = corpsTeckel[i - 1]; //prend la place de l'element placé avant 
@@ -365,7 +373,9 @@ namespace ProjetTeckel
                         nombrecorps = 0;
                         corpsTeckel.Clear();
                         trucASupprimer.Clear();
-                        imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
+                        tailleCorps = 0;
+                        rectTeckel.Clear();
+                    imgTeckelHaut.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\tete.png"));
                         teckel.Fill = imgTeckelHaut;
                         Menu ChoixMenu = new Menu();
                         ChoixMenu.ShowDialog();
@@ -399,7 +409,7 @@ namespace ProjetTeckel
 
             
         }
-        void Corps()
+        private void Corps()
         {
             Rectangle corpsPart = new Rectangle();
             corpsPart.Width = teckel.Width;
