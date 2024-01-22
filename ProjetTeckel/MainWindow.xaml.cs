@@ -40,6 +40,14 @@ namespace ProjetTeckel
         ImageBrush imgTeckelGauche;
         ImageBrush imgTeckelDroite;
         ImageBrush imgTeckelBas;
+        public MediaPlayer musicUranus = new MediaPlayer();
+        public void MediaEndedUranus(object? Sender, EventArgs e)
+        {
+            musicUranus.Position = TimeSpan.Zero;
+            musicUranus.Play();
+        }
+
+        public double volumeMusic = 1;
         int ligneRec;
         int colRec;
         int scoreacheck;
@@ -60,8 +68,11 @@ namespace ProjetTeckel
         public MainWindow()
         {
             InitializeComponent();
-            music.Source = new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/uranus.mp3");
-            music.Play();
+            var varMusicUranus = new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/uranus.mp3");
+            musicUranus.Open(varMusicUranus);
+            musicUranus.Volume = volumeMusic;
+            musicUranus.MediaEnded += new EventHandler(MediaEndedUranus);
+            musicUranus.Play();
 
             ImageBrush Map = new ImageBrush();
             Map.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "image\\map.png"));

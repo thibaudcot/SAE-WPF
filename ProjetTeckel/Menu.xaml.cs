@@ -37,5 +37,9 @@ namespace ProjetTeckel
         {
             this.DialogResult = false;
         }
+        public void Musique(object sender, RoutedPropertyChangedEventArgs<double> e) 
+        {
+            ((MainWindow)Application.Current.MainWindow).volumeMusic = (double)this.Sons.Value/100;
+        }
     }
 }

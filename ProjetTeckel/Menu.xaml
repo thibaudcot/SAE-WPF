@@ -54,6 +54,7 @@
                 FontFamily="Browood-Regular"
                 Language="fr-fr"
                 Text="  " /></TextBlock>
+        <Slider x:Name ="Sons" HorizontalAlignment="Center" Margin="0,500,0,0" VerticalAlignment="Top" Width="250" Height="20" Minimum="0" Maximum="100" ValueChanged="Musique"/>
 
     </Grid>
 </Window>
